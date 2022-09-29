@@ -1,11 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { IconTree } from "../ui/IconTree";
 import PClogo from "../assets/logoPC.png";
+import { useStateContext } from "../context/ContextProvider";
 
 export const Points = () => {
+  const { setIdUser } = useStateContext();
   const navigate = useNavigate();
   setTimeout(() => {
     navigate("/");
+    setIdUser("");
   }, 60000);
 
   return (

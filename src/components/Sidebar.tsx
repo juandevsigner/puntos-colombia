@@ -13,10 +13,10 @@ export const Sidebar = () => {
       <div className="flex flex-col justify-center items-center">
         <IconTree />
 
-        <p className="mb-10 text-justify ">
+        <p className="mb-10  text-2xl">
           Queremos incentivar tu compromiso con la tierra, por cada residuo
           reciclable registrado,{" "}
-          <span className="font-bold text-green-600">
+          <span className="font-bold text-green-600 text-3xl">
             estaremos obsequiándote puntos Colombia.
           </span>
         </p>

@@ -8,6 +8,7 @@ export const Modal = () => {
   const { modal, setModal } = useStateContext();
   const handleClick = () => {
     navigate("/user/register");
+    setModal(false);
   };
   return (
     <>
