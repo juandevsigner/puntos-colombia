@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { TiWarning } from "react-icons/ti";
 import EcoShop from "../assets/ecoshopping.webp";
 import { useStateContext } from "../context/ContextProvider";
+import { Modal } from "../ui";
 
 export const Auth = () => {
   const navigate = useNavigate();
   const [msg, setMsg] = useState<string>("");
-  const { setIdUser, idUser } = useStateContext();
+  const { setIdUser, idUser, setModal } = useStateContext();
   const handleClick = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (idUser === "") {
@@ -22,6 +23,11 @@ export const Auth = () => {
       setTimeout(() => {
         setMsg("");
       }, 3000);
+      return;
+    }
+
+    if (idUser.length === 7) {
+      setModal(true);
       return;
     }
 
@@ -52,6 +58,7 @@ export const Auth = () => {
         />
       </form>
       <img className="w-72" src={EcoShop} alt="ecoshopping" />
+      <Modal />
     </div>
   );
 };

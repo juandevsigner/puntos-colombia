@@ -13,7 +13,7 @@ export const Register = () => {
         <p className="uppercase text-4xl">juan alberto rios</p>
       </div>
       <p className="bg-green-500 py-8 px-14 rounded-full text-9xl text-white">
-        9
+        0
       </p>
       <p className="text-green-500 text-3xl">Envases registrados</p>
       <button onClick={handleClick} type="button" className="btn-primary">

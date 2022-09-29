@@ -1,8 +1,13 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import { IconTree } from "../ui/IconTree";
 import PClogo from "../assets/logoPC.png";
 
 export const Points = () => {
+  const navigate = useNavigate();
+  setTimeout(() => {
+    navigate("/");
+  }, 60000);
+
   return (
     <div className="flex flex-col justify-center items-center gap-5">
       <div className="bg-green-500 p-5 rounded-2xl">
