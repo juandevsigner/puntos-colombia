@@ -4,7 +4,12 @@ import { Provider, ValueProps } from "./Interfaces";
 const StateContext: React.Context<ValueProps> = createContext({} as ValueProps);
 
 export const ContextProvider = ({ children }: Provider) => {
-  return <StateContext.Provider value={{}}>{children}</StateContext.Provider>;
+  const [idUser, setIdUser] = useState<string>("");
+  return (
+    <StateContext.Provider value={{ idUser, setIdUser }}>
+      {children}
+    </StateContext.Provider>
+  );
 };
 
 export const useStateContext = () => useContext(StateContext);
