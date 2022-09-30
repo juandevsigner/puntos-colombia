@@ -9,7 +9,7 @@ export const Points = () => {
   setTimeout(() => {
     navigate("/");
     setIdUser("");
-  }, 60000);
+  }, 15000);
 
   return (
     <div className="flex flex-col justify-center items-center gap-5">
