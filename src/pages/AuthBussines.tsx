@@ -1,4 +1,5 @@
-import { useState, useContext } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Nature, Alert, Spinner } from "../ui";
 import EcoShop from "../assets/ecoshopping.webp";
 import { useStateContext } from "../context/ContextProvider";
@@ -7,6 +8,14 @@ export const AuthBussines = () => {
   const [name, setName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const { msg, setMsg, authBussiness, load } = useStateContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/home");
+    }
+  }, []);
 
   const handleClick = async (e: any) => {
     e.preventDefault();
