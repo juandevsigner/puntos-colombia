@@ -1,16 +1,12 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { TiWarning } from "react-icons/ti";
 import EcoShop from "../assets/ecoshopping.webp";
 import { useStateContext } from "../context/ContextProvider";
-import { Modal } from "../ui";
+import { Modal, Spinner } from "../ui";
 
 export const AuthUser = () => {
-  const navigate = useNavigate();
-  const [msg, setMsg] = useState<string>("");
-  const { setIdUser, idUser, setModal } = useStateContext();
+  const { setIdUser, idUser, load, setMsg, msg, authUser } = useStateContext();
 
-  const handleClick = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleClick = async (e: any) => {
     e.preventDefault();
     if (idUser === "") {
       setMsg("Por favor ingrese un número de cedula");
@@ -27,12 +23,8 @@ export const AuthUser = () => {
       return;
     }
 
-    if (idUser.length === 7) {
-      setModal(true);
-      return;
-    }
-
-    navigate("/user/register");
+    await authUser(idUser);
+    setIdUser("");
   };
 
   return (
@@ -52,19 +44,13 @@ export const AuthUser = () => {
           onChange={e => setIdUser(e.target.value)}
           value={idUser}
         />
-        <input
-          className="my-5  border-b border-green-600 w-full p-2 text-center text-xl"
-          placeholder="Ingrese su número de celular"
-          type="number"
-          onChange={e => setIdUser(e.target.value)}
-          value={idUser}
-        />
-        <input
+        <button
+          className="my-3 btn-primary justify-center items-center cursor-pointer transition-all"
           type="submit"
-          className="my-3 btn-primary justify-center items-center cursor-pointer"
-          value="Comprobar"
           onClick={handleClick}
-        />
+        >
+          {load ? <Spinner /> : <p>Comprobar</p>}
+        </button>
       </form>
       <img className="w-72" src={EcoShop} alt="ecoshopping" />
       <Modal />

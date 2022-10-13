@@ -1,17 +1,14 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { Nature, Alert } from "../ui";
+import { Nature, Alert, Spinner } from "../ui";
 import EcoShop from "../assets/ecoshopping.webp";
-import { TiWarning } from "react-icons/ti";
-import axiosClient from "../config/axiosClient";
 import { useStateContext } from "../context/ContextProvider";
 
 export const AuthBussines = () => {
   const [name, setName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { msg, setMsg, authBussiness } = useStateContext();
+  const { msg, setMsg, authBussiness, load } = useStateContext();
 
-  const handleClick = async (e: React.FormEvent<HTMLInputElement>) => {
+  const handleClick = async (e: any) => {
     e.preventDefault();
     if ([name, password].includes("")) {
       setMsg("Todos los campos son obligatorios");
@@ -27,7 +24,6 @@ export const AuthBussines = () => {
       id_business: `${import.meta.env.VITE_id_business}`,
     };
     await authBussiness(userData);
-
     setName("");
     setPassword("");
   };
@@ -54,12 +50,14 @@ export const AuthBussines = () => {
             onChange={e => setPassword(e.target.value)}
             value={password}
           />
-          <input
+
+          <button
+            className="my-3 btn-primary justify-center items-center cursor-pointer transition-all"
             type="submit"
-            className="my-3 btn-primary justify-center items-center cursor-pointer"
-            value="Comprobar"
             onClick={handleClick}
-          />
+          >
+            {load ? <Spinner /> : <p>Comprobar</p>}
+          </button>
         </form>
         <img className="w-72" src={EcoShop} alt="ecoshopping" />
       </div>
