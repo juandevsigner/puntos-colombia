@@ -5,10 +5,11 @@ import EcoShop from "../assets/ecoshopping.webp";
 import { useStateContext } from "../context/ContextProvider";
 import { Modal } from "../ui";
 
-export const Auth = () => {
+export const AuthUser = () => {
   const navigate = useNavigate();
   const [msg, setMsg] = useState<string>("");
   const { setIdUser, idUser, setModal } = useStateContext();
+
   const handleClick = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (idUser === "") {
@@ -33,6 +34,7 @@ export const Auth = () => {
 
     navigate("/user/register");
   };
+
   return (
     <div className="flex flex-col items-center justify-items-center transition-all">
       {msg !== "" && (
@@ -46,6 +48,13 @@ export const Auth = () => {
         <input
           className="my-5  border-b border-green-600 w-full p-2 text-center text-xl"
           placeholder="Ingrese su número de cedula"
+          type="number"
+          onChange={e => setIdUser(e.target.value)}
+          value={idUser}
+        />
+        <input
+          className="my-5  border-b border-green-600 w-full p-2 text-center text-xl"
+          placeholder="Ingrese su número de celular"
           type="number"
           onChange={e => setIdUser(e.target.value)}
           value={idUser}

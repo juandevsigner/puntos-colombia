@@ -7,7 +7,7 @@ export const Points = () => {
   const { setIdUser } = useStateContext();
   const navigate = useNavigate();
   setTimeout(() => {
-    navigate("/");
+    navigate("/home");
     setIdUser("");
   }, 15000);
 

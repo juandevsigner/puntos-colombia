@@ -1,4 +1,5 @@
+export * from "./AuthBussines";
+export * from "./AuthUser";
 export * from "./Home";
-export * from "./Register";
-export * from "./Auth";
 export * from "./Points";
+export * from "./Register";
