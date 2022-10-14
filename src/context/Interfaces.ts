@@ -10,6 +10,10 @@ export interface UserDate {
 export interface ValueProps {
   idUser: string;
   setIdUser: React.Dispatch<React.SetStateAction<string>>;
+  pointsCol: string;
+  setPointsCol: React.Dispatch<React.SetStateAction<string>>;
+  dataPoints: any;
+  setDataPoints: React.Dispatch<React.SetStateAction<any>>;
   customer: string | null;
   setCustomer: React.Dispatch<React.SetStateAction<string | null>>;
   msg: string;
@@ -19,5 +23,7 @@ export interface ValueProps {
   modal: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
   authBussiness: (dataUser: UserDate) => Promise<void>;
+  getPoints: () => Promise<void>;
+  setPoints: () => Promise<void>;
   authUser: (user: string) => Promise<void>;
 }

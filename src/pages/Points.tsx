@@ -2,14 +2,20 @@ import { useNavigate } from "react-router-dom";
 import { IconTree } from "../ui/IconTree";
 import PClogo from "../assets/logoPC.png";
 import { useStateContext } from "../context/ContextProvider";
+import { useEffect } from "react";
 
 export const Points = () => {
-  const { setIdUser } = useStateContext();
+  const { setIdUser, pointsCol } = useStateContext();
   const navigate = useNavigate();
-  setTimeout(() => {
-    navigate("/home");
-    setIdUser("");
-  }, 15000);
+
+  useEffect(() => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userName");
+    setTimeout(() => {
+      navigate("/");
+      setIdUser("");
+    }, 15000);
+  }, []);
 
   return (
     <div className="flex flex-col justify-center items-center gap-5">
@@ -19,7 +25,7 @@ export const Points = () => {
         </p>
       </div>
       <div className="flex justify-between items-center">
-        <p className="text-green-500 text-9xl">270</p>
+        <p className="text-green-500 text-9xl">{pointsCol}</p>
         <img className="w-auto h-32" src={PClogo} alt="logo puntos colombia" />
       </div>
       <div className="flex flex-col justify-center items-center">

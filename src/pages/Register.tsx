@@ -2,10 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { BsPersonCircle } from "react-icons/bs";
 import { useStateContext } from "../context/ContextProvider";
 import { useEffect } from "react";
+import { CardPoints } from "../components";
+import Icon from "../assets/t-shit-icon.png";
+import { Spinner } from "../ui";
 
 export const Register = () => {
   const navigate = useNavigate();
-  const { customer, setCustomer } = useStateContext();
+  const { customer, setCustomer, getPoints, dataPoints, setPoints, load } =
+    useStateContext();
 
   useEffect(() => {
     const userStorage = localStorage.getItem("userName");
@@ -13,12 +17,18 @@ export const Register = () => {
       navigate("/user");
       return;
     }
-    setCustomer(userStorage);
+    const data = JSON.parse(userStorage);
+    setCustomer(data.name);
   }),
     [];
+
+  useEffect(() => {
+    getPoints();
+  }, []);
   const userName: any = customer?.split("_");
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    await setPoints();
     navigate("/user/points");
   };
 
@@ -28,12 +38,20 @@ export const Register = () => {
         <BsPersonCircle className="text-green-500 text-4xl" />
         <p className="uppercase text-4xl">{userName[0]}</p>
       </div>
-      <p className="bg-green-500 py-8 px-14 rounded-full text-9xl text-white">
-        0
-      </p>
+      <div className="flex gap-5">
+        {dataPoints?.map((data: any) => (
+          <CardPoints
+            count={data.count}
+            name={data.name}
+            img={Icon}
+            key={data?.id_product}
+          />
+        ))}
+      </div>
+
       <p className="text-green-500 text-3xl">Envases registrados</p>
       <button onClick={handleClick} type="button" className="btn-primary">
-        Finalizar
+        {load ? <Spinner /> : <p>Finalizar</p>}
       </button>
     </div>
   );
