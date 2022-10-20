@@ -48,7 +48,7 @@ export const Modal = () => {
                   </Dialog.Title>
                   <div className="my-5 flex flex-col justify-center items-center">
                     <p className="text-center">
-                      Puedes registraste en Puntos Colombia escaneando el
+                      Puedes registrarte en Puntos Colombia escaneando el
                       siguiente QR.
                     </p>
                     <hr className="w-full my-2" />
@@ -60,7 +60,7 @@ export const Modal = () => {
 
                     <hr className="w-full my-2" />
                     <p className="text-center">
-                      Si no deseas registrate puedes contribuir sin ningún
+                      Si no deseas registrarte puedes contribuir sin ningún
                       problema.
                     </p>
                     <i className="text-green-500 text-center text-sm ">
