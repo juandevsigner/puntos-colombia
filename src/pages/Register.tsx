@@ -43,7 +43,7 @@ export const Register = () => {
           <CardPoints
             count={data.count}
             name={data.name}
-            img={Icon}
+            img={data.url_icon}
             key={data?.id_product}
           />
         ))}
