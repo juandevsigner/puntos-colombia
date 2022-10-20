@@ -5,7 +5,8 @@ import { useStateContext } from "../context/ContextProvider";
 import { useEffect } from "react";
 
 export const Points = () => {
-  const { setIdUser, pointsCol, setNotPoints, notPoints } = useStateContext();
+  const { setIdUser, pointsCol, setNotPoints, notPoints, setLoad } =
+    useStateContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,9 +16,9 @@ export const Points = () => {
       navigate("/");
       setIdUser("");
       setNotPoints(false);
+      setLoad(false);
     }, 15000);
   }, []);
-  console.log(notPoints);
 
   return (
     <div className="flex flex-col justify-center items-center gap-5">
