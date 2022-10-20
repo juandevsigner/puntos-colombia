@@ -3,8 +3,7 @@ import { BsPersonCircle } from "react-icons/bs";
 import { useStateContext } from "../context/ContextProvider";
 import { useEffect } from "react";
 import { CardPoints } from "../components";
-import Icon from "../assets/t-shit-icon.png";
-import { Spinner } from "../ui";
+import { Spinner, Modal } from "../ui";
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -53,6 +52,7 @@ export const Register = () => {
       <button onClick={handleClick} type="button" className="btn-primary">
         {load ? <Spinner /> : <p>Finalizar</p>}
       </button>
+      <Modal />
     </div>
   );
 };

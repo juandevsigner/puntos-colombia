@@ -46,18 +46,29 @@ export const Modal = () => {
                     as="h3"
                     className="text-xl font-semibold text-center leading-6 text-red-600"
                   >
-                    No te encuentras registrado
+                    Opps! No te encuentras registrado
                   </Dialog.Title>
-                  <div className="my-10">
-                    <p className=" text-lg">
-                      Sin embargo, puedes contribuir sin ningún problema
+                  <div className="my-10 flex flex-col justify-center items-center">
+                    <p>
+                      Puedes registraste en Puntos Colombia escaneando el
+                      siguiente QR
                     </p>
-                    <p className="text-lg">
-                      Recuerda que nuestro compromiso está en ayudar a{" "}
-                      <span className="text-green-500 font-semibold">
-                        conservar nuestro medio ambiente
-                      </span>
+                    <hr className="w-full my-2" />
+                    <img
+                      className="w-3/5"
+                      src="https://www.ocu.org/-/media/ta/images/qr-code.png?rev=2e1cc496-40d9-4e21-a7fb-9e2c76d6a288&hash=AF7C881FCFD0CBDA00B860726B5E340B&mw=960"
+                      alt="QR-PC"
+                    />
+
+                    <hr className="w-full my-2" />
+                    <p>
+                      Si no deseas registrate puedes contribuir sin ningún
+                      problema
                     </p>
+                    <i className="text-green-500 text-center text-sm ">
+                      Recuerda que nuestro compromiso está en ayudar a conservar
+                      nuestro medio ambiente
+                    </i>
                   </div>
 
                   <div className="mt-4 gap-7 flex justify-between items-center">

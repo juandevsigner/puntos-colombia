@@ -71,6 +71,7 @@ export const ContextProvider = ({ children }: Provider) => {
       navigate("/user/register");
     } catch (error) {
       console.log(error);
+      setModal(true);
     }
     setLoad(false);
   };
