@@ -82,7 +82,7 @@ export const Modal = () => {
                       className="btn-primary"
                       onClick={handleClick}
                     >
-                      Continuar
+                      Donar
                     </button>
                   </div>
                 </Dialog.Panel>
