@@ -1,7 +1,7 @@
 import { TiWarning } from "react-icons/ti";
 import EcoShop from "../assets/ecoshopping.webp";
 import { useStateContext } from "../context/ContextProvider";
-import { Modal, Spinner } from "../ui";
+import { Modal, ModalForm, Spinner } from "../ui";
 
 export const AuthUser = () => {
   const { setIdUser, idUser, load, setMsg, msg, authUser } = useStateContext();
@@ -24,7 +24,6 @@ export const AuthUser = () => {
     }
 
     await authUser(idUser);
-    setIdUser("");
   };
 
   return (
@@ -54,6 +53,7 @@ export const AuthUser = () => {
       </form>
       <img className="w-72" src={EcoShop} alt="ecoshopping" />
       <Modal />
+      <ModalForm />
     </div>
   );
 };

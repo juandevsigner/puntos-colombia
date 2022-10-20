@@ -4,11 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useStateContext } from "../context/ContextProvider";
 
 export const Modal = () => {
-  const navigate = useNavigate();
-  const { modal, setModal } = useStateContext();
+  const { modal, setModal, setModalForm } = useStateContext();
   const handleClick = () => {
-    navigate("/user/register");
-    setModal(false);
+    setModalForm(true);
   };
   return (
     <>
@@ -44,7 +42,7 @@ export const Modal = () => {
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-xl font-semibold text-center   text-red-600"
+                    className="text-xl font-semibold text-center  text-red-600"
                   >
                     Opps! No te encuentras registrado
                   </Dialog.Title>

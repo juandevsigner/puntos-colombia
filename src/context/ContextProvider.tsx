@@ -14,6 +14,7 @@ export const ContextProvider = ({ children }: Provider) => {
   const [load, setLoad] = useState<boolean>(false);
   const [dataPoints, setDataPoints] = useState<Array<any>>([]);
   const [pointsCol, setPointsCol] = useState<string>("");
+  const [modalForm, setModalForm] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -128,6 +129,25 @@ export const ContextProvider = ({ children }: Provider) => {
     setLoad(false);
   };
 
+  const userNotPC = async (name: string, phone: string) => {
+    setLoad(true);
+    try {
+      const userInfo = {
+        name,
+        phone,
+        id: idUser,
+      };
+      localStorage.setItem("userName", JSON.stringify(userInfo));
+      navigate("/user/register");
+      setModalForm(false);
+      setModal(false);
+      setIdUser("");
+    } catch (error) {
+      console.log(error);
+    }
+    setLoad(false);
+  };
+
   return (
     <StateContext.Provider
       value={{
@@ -149,6 +169,9 @@ export const ContextProvider = ({ children }: Provider) => {
         setPoints,
         pointsCol,
         setPointsCol,
+        modalForm,
+        setModalForm,
+        userNotPC,
       }}
     >
       {children}

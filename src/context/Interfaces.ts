@@ -20,9 +20,12 @@ export interface ValueProps {
   setMsg: React.Dispatch<React.SetStateAction<string>>;
   load: boolean;
   setLoad: React.Dispatch<React.SetStateAction<boolean>>;
+  modalForm: boolean;
+  setModalForm: React.Dispatch<React.SetStateAction<boolean>>;
   modal: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
   authBussiness: (dataUser: UserDate) => Promise<void>;
+  userNotPC: (name: string, phone: string) => Promise<void>;
   getPoints: () => Promise<void>;
   setPoints: () => Promise<void>;
   authUser: (user: string) => Promise<void>;
