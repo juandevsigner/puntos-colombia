@@ -15,6 +15,7 @@ export const ContextProvider = ({ children }: Provider) => {
   const [dataPoints, setDataPoints] = useState<Array<any>>([]);
   const [pointsCol, setPointsCol] = useState<string>("");
   const [modalForm, setModalForm] = useState<boolean>(false);
+  const [notPoints, setNotPoints] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -123,6 +124,10 @@ export const ContextProvider = ({ children }: Provider) => {
         configToken
       );
       setPointsCol(data.mainPoints);
+      if (!data.return.active) {
+        setNotPoints(true);
+        return;
+      }
     } catch (error) {
       console.log(error);
     }
@@ -172,6 +177,8 @@ export const ContextProvider = ({ children }: Provider) => {
         modalForm,
         setModalForm,
         userNotPC,
+        notPoints,
+        setNotPoints,
       }}
     >
       {children}
