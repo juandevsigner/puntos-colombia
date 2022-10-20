@@ -44,14 +44,14 @@ export const Modal = () => {
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-xl font-semibold text-center leading-6 text-red-600"
+                    className="text-xl font-semibold text-center   text-red-600"
                   >
                     Opps! No te encuentras registrado
                   </Dialog.Title>
-                  <div className="my-10 flex flex-col justify-center items-center">
-                    <p>
+                  <div className="my-5 flex flex-col justify-center items-center">
+                    <p className="text-center">
                       Puedes registraste en Puntos Colombia escaneando el
-                      siguiente QR
+                      siguiente QR.
                     </p>
                     <hr className="w-full my-2" />
                     <img
@@ -61,13 +61,13 @@ export const Modal = () => {
                     />
 
                     <hr className="w-full my-2" />
-                    <p>
+                    <p className="text-center">
                       Si no deseas registrate puedes contribuir sin ningún
-                      problema
+                      problema.
                     </p>
                     <i className="text-green-500 text-center text-sm ">
                       Recuerda que nuestro compromiso está en ayudar a conservar
-                      nuestro medio ambiente
+                      nuestro medio ambiente.
                     </i>
                   </div>
 
