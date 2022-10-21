@@ -15,7 +15,7 @@ export const Points = () => {
     setTimeout(() => {
       navigate("/");
       setIdUser("");
-      setNotPoints(false);
+      setNotPoints(true);
       setLoad(false);
     }, 15000);
   }, []);
@@ -24,12 +24,12 @@ export const Points = () => {
     <div className="flex flex-col justify-center items-center gap-5">
       <div className="bg-green-500 p-5 rounded-2xl">
         <p className="text-4xl uppercase text-white ">
-          {notPoints
+          {!notPoints
             ? " Gracias por tu donación"
             : "¡ Felicidades Haz Ganado !"}
         </p>
       </div>
-      {notPoints ? null : (
+      {!notPoints ? null : (
         <>
           <div className="flex justify-between items-center">
             <p className="text-green-500 text-9xl">{pointsCol}</p>

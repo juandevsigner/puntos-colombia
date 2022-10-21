@@ -15,7 +15,7 @@ export const ContextProvider = ({ children }: Provider) => {
   const [dataPoints, setDataPoints] = useState<Array<any>>([]);
   const [pointsCol, setPointsCol] = useState<string>("");
   const [modalForm, setModalForm] = useState<boolean>(false);
-  const [notPoints, setNotPoints] = useState<boolean>(false);
+  const [notPoints, setNotPoints] = useState<boolean>(true);
 
   const navigate = useNavigate();
 
@@ -65,15 +65,17 @@ export const ContextProvider = ({ children }: Provider) => {
         configToken
       );
       const userInfo = {
-        name: data.customer,
+        name: data.name,
         id: data.identification_number,
-        movi: data.movil,
+        phone: data.movil,
       };
       localStorage.setItem("userName", JSON.stringify(userInfo));
+      console.log(data);
       navigate("/user/register");
     } catch (error) {
       console.log(error);
       setModal(true);
+      setNotPoints(false);
     }
     setLoad(false);
   };
@@ -89,7 +91,9 @@ export const ContextProvider = ({ children }: Provider) => {
         configToken
       );
       setDataPoints(data);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const setPoints = async () => {
@@ -98,10 +102,11 @@ export const ContextProvider = ({ children }: Provider) => {
     const datosUser = JSON.parse(user);
     const userPointsData = {
       identification_number: datosUser.id,
-      movil: datosUser.movi,
+      movil: datosUser.phone,
       code_container: `${import.meta.env.VITE_code_container}`,
       documentType: 2,
-      generate_points: true,
+      generate_points: notPoints,
+      name: datosUser.name,
       products: [
         {
           code: "RP-1",
@@ -117,6 +122,9 @@ export const ContextProvider = ({ children }: Provider) => {
         },
       ],
     };
+
+    console.log(userPointsData);
+
     try {
       const { data } = await axiosClient.post(
         "/puntos-colombia/process_sale",
@@ -124,9 +132,9 @@ export const ContextProvider = ({ children }: Provider) => {
         configToken
       );
       setPointsCol(data.mainPoints);
+      console.log(data);
       if (!data.return.active) {
-        setNotPoints(true);
-        return;
+        setNotPoints(false);
       }
     } catch (error) {
       console.log(error);
