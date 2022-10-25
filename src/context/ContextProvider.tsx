@@ -16,10 +16,15 @@ export const ContextProvider = ({ children }: Provider) => {
   const [pointsCol, setPointsCol] = useState<string>("");
   const [modalForm, setModalForm] = useState<boolean>(false);
   const [notPoints, setNotPoints] = useState<boolean>(true);
+  const [errorBD, setErrorBD] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
-  const token = localStorage.getItem("token");
+  const token = import.meta.env.VITE_token;
+
+  useEffect(() => {
+    localStorage.setItem("token", JSON.stringify(token));
+  });
 
   const configToken = {
     headers: {
@@ -38,8 +43,9 @@ export const ContextProvider = ({ children }: Provider) => {
         },
       };
       const { data } = await axiosClient.post("/token", dataUser, config);
-      const token = data.token;
-      localStorage.setItem("token", JSON.stringify(token));
+      //SE COMENTA REGITRO DE TOKEN PARA AUTOLOGIN
+      /* const token = data.token;
+      localStorage.setItem("token", JSON.stringify(token)); */
       navigate("/home");
     } catch (error: any) {
       setMsg(error.response.data.msg);
@@ -70,7 +76,6 @@ export const ContextProvider = ({ children }: Provider) => {
         phone: data.movil,
       };
       localStorage.setItem("userName", JSON.stringify(userInfo));
-      console.log(data);
       navigate("/user/register");
     } catch (error) {
       console.log(error);
@@ -93,6 +98,11 @@ export const ContextProvider = ({ children }: Provider) => {
       setDataPoints(data);
     } catch (error) {
       console.log(error);
+      setErrorBD(true);
+      setTimeout(() => {
+        navigate("/home");
+        setErrorBD(false);
+      }, 5000);
     }
   };
 
@@ -123,8 +133,6 @@ export const ContextProvider = ({ children }: Provider) => {
       ],
     };
 
-    console.log(userPointsData);
-
     try {
       const { data } = await axiosClient.post(
         "/puntos-colombia/process_sale",
@@ -132,12 +140,17 @@ export const ContextProvider = ({ children }: Provider) => {
         configToken
       );
       setPointsCol(data.mainPoints);
-      console.log(data);
+
       if (!data.return.active) {
         setNotPoints(false);
       }
     } catch (error) {
       console.log(error);
+      setErrorBD(true);
+      setTimeout(() => {
+        navigate("/home");
+        setErrorBD(false);
+      }, 5000);
     }
     setLoad(false);
   };
@@ -187,6 +200,8 @@ export const ContextProvider = ({ children }: Provider) => {
         userNotPC,
         notPoints,
         setNotPoints,
+        errorBD,
+        setErrorBD,
       }}
     >
       {children}

@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom";
 import { MdArrowForwardIos } from "react-icons/md";
-import { Nature, IconTree } from "../ui";
+import { IconTree } from "../ui";
 
 export const Sidebar = () => {
   return (
     <div className="bg-white relative shadow-lg w-1/4 p-10 flex flex-col justify-center items-center">
-      <div className="absolute top-0 left-0">
-        <Nature />
-      </div>
+      <div className="absolute top-0 left-0"></div>
       <div className="flex flex-col justify-center items-center">
         <IconTree />
 
