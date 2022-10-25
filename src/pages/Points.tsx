@@ -3,22 +3,27 @@ import { IconTree } from "../ui/IconTree";
 import PClogo from "../assets/logoPC.png";
 import { useStateContext } from "../context/ContextProvider";
 import { useEffect } from "react";
+import { Error } from "../ui";
 
 export const Points = () => {
-  const { setIdUser, pointsCol, setNotPoints, notPoints, setLoad } =
+  const { setIdUser, pointsCol, setNotPoints, notPoints, setLoad, errorBD } =
     useStateContext();
   const navigate = useNavigate();
 
   useEffect(() => {
     /* localStorage.removeItem("token"); */
     localStorage.removeItem("userName");
-    setTimeout(() => {
+    /* setTimeout(() => {
       navigate("/");
       setIdUser("");
       setNotPoints(true);
       setLoad(false);
-    }, 15000);
+    }, 15000); */
   }, []);
+
+  if (!errorBD) {
+    return <Error />;
+  }
 
   return (
     <div className="flex flex-col justify-center items-center gap-5">

@@ -16,7 +16,7 @@ export const ContextProvider = ({ children }: Provider) => {
   const [pointsCol, setPointsCol] = useState<string>("");
   const [modalForm, setModalForm] = useState<boolean>(false);
   const [notPoints, setNotPoints] = useState<boolean>(true);
-  const [errorBD, setErrorBD] = useState<boolean>(true);
+  const [errorBD, setErrorBD] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -135,7 +135,7 @@ export const ContextProvider = ({ children }: Provider) => {
         configToken
       );
       setPointsCol(data.mainPoints);
-      console.log(data);
+
       if (!data.return.active) {
         setNotPoints(false);
       }
