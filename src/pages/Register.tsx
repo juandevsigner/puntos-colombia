@@ -3,12 +3,19 @@ import { BsPersonCircle } from "react-icons/bs";
 import { useStateContext } from "../context/ContextProvider";
 import { useEffect } from "react";
 import { CardPoints } from "../components";
-import { Spinner } from "../ui";
+import { Spinner, Error } from "../ui";
 
 export const Register = () => {
   const navigate = useNavigate();
-  const { customer, setCustomer, getPoints, dataPoints, setPoints, load } =
-    useStateContext();
+  const {
+    customer,
+    setCustomer,
+    getPoints,
+    dataPoints,
+    setPoints,
+    load,
+    errorBD,
+  } = useStateContext();
 
   useEffect(() => {
     const userStorage = localStorage.getItem("userName");
@@ -30,6 +37,9 @@ export const Register = () => {
     await setPoints();
     navigate("/user/points");
   };
+  if (!errorBD) {
+    return <Error />;
+  }
 
   return (
     <div className="flex flex-col gap-10 justify-center items-center">

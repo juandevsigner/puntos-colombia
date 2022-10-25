@@ -98,6 +98,11 @@ export const ContextProvider = ({ children }: Provider) => {
       setDataPoints(data);
     } catch (error) {
       console.log(error);
+      setErrorBD(true);
+      setTimeout(() => {
+        navigate("/home");
+        setErrorBD(false);
+      }, 5000);
     }
   };
 
@@ -141,6 +146,11 @@ export const ContextProvider = ({ children }: Provider) => {
       }
     } catch (error) {
       console.log(error);
+      setErrorBD(true);
+      setTimeout(() => {
+        navigate("/home");
+        setErrorBD(false);
+      }, 5000);
     }
     setLoad(false);
   };
