@@ -24,6 +24,8 @@ export interface ValueProps {
   setModalForm: React.Dispatch<React.SetStateAction<boolean>>;
   modal: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  errorBD: boolean;
+  setErrorBD: React.Dispatch<React.SetStateAction<boolean>>;
   notPoints: boolean;
   setNotPoints: React.Dispatch<React.SetStateAction<boolean>>;
   authBussiness: (dataUser: UserDate) => Promise<void>;

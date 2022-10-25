@@ -16,6 +16,7 @@ export const ContextProvider = ({ children }: Provider) => {
   const [pointsCol, setPointsCol] = useState<string>("");
   const [modalForm, setModalForm] = useState<boolean>(false);
   const [notPoints, setNotPoints] = useState<boolean>(true);
+  const [errorBD, setErrorBD] = useState<boolean>(true);
 
   const navigate = useNavigate();
 
@@ -189,6 +190,8 @@ export const ContextProvider = ({ children }: Provider) => {
         userNotPC,
         notPoints,
         setNotPoints,
+        errorBD,
+        setErrorBD,
       }}
     >
       {children}
