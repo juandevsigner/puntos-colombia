@@ -21,7 +21,7 @@ export const Points = () => {
     }, 15000); */
   }, []);
 
-  if (!errorBD) {
+  if (errorBD) {
     return <Error />;
   }
 

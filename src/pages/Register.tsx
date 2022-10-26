@@ -37,7 +37,7 @@ export const Register = () => {
     await setPoints();
     navigate("/user/points");
   };
-  if (!errorBD) {
+  if (errorBD) {
     return <Error />;
   }
 
