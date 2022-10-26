@@ -2,6 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStateContext } from "../context/ContextProvider";
+import QR from "../assets/registro_qr_puntos_colombia.png";
 
 export const Modal = () => {
   const { modal, setModal, setModalForm } = useStateContext();
@@ -52,11 +53,7 @@ export const Modal = () => {
                       siguiente QR.
                     </p>
                     <hr className="w-full my-2" />
-                    <img
-                      className="w-3/5"
-                      src="https://www.ocu.org/-/media/ta/images/qr-code.png?rev=2e1cc496-40d9-4e21-a7fb-9e2c76d6a288&hash=AF7C881FCFD0CBDA00B860726B5E340B&mw=960"
-                      alt="QR-PC"
-                    />
+                    <img className="w-3/5" src={QR} alt="QR-PC" />
 
                     <hr className="w-full my-2" />
                     <p className="text-center">
