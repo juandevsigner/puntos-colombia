@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 
-const axiosClient = axios.create({
+const axiosClient: AxiosInstance = axios.create({
   baseURL: `${import.meta.env.VITE_url_puntos_colombia}`,
 });
 
