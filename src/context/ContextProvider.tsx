@@ -145,7 +145,7 @@ export const ContextProvider = ({ children }: Provider) => {
       );
       setPointsCol(data.mainPoints);
 
-      if (!data.return.active) {
+      if (!data.allowAccrual) {
         setNotPoints(false);
       }
       console.log("-------200--------");
