@@ -12,7 +12,7 @@ export const Points = () => {
 
   useEffect(() => {
     /* localStorage.removeItem("token"); */
-    localStorage.removeItem("userName");
+    /* localStorage.removeItem("userName"); */
     setTimeout(() => {
       navigate("/home");
       setIdUser("");

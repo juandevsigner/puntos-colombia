@@ -70,6 +70,7 @@ export const ContextProvider = ({ children }: Provider) => {
         userUid,
         configToken
       );
+      console.log(data);
       const userInfo = {
         name: data.name,
         id: data.identification_number,
@@ -114,9 +115,10 @@ export const ContextProvider = ({ children }: Provider) => {
       identification_number: datosUser.id,
       movil: datosUser.phone,
       code_container: `${import.meta.env.VITE_code_container}`,
+      name: datosUser.name,
       documentType: 2,
       generate_points: notPoints,
-      name: datosUser.name,
+      generate_error_puntos_colombia: false,
       products: [
         {
           code: "RP-1",
@@ -133,6 +135,8 @@ export const ContextProvider = ({ children }: Provider) => {
       ],
     };
 
+    console.log(userPointsData);
+
     try {
       const { data } = await axiosClient.post(
         "/puntos-colombia/process_sale",
@@ -144,13 +148,15 @@ export const ContextProvider = ({ children }: Provider) => {
       if (!data.return.active) {
         setNotPoints(false);
       }
+      console.log(data);
     } catch (error) {
       console.log(error);
-      setErrorBD(true);
+      console.log("-------Catch--------");
+      /* setErrorBD(true);
       setTimeout(() => {
         navigate("/home");
         setErrorBD(false);
-      }, 5000);
+      }, 5000); */
     }
     setLoad(false);
   };
