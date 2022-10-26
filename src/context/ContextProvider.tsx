@@ -152,11 +152,11 @@ export const ContextProvider = ({ children }: Provider) => {
     } catch (error) {
       console.log(error);
       console.log("-------Catch--------");
-      /* setErrorBD(true);
+      setErrorBD(true);
       setTimeout(() => {
         navigate("/home");
         setErrorBD(false);
-      }, 5000); */
+      }, 5000);
     }
     setLoad(false);
   };
