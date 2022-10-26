@@ -111,14 +111,14 @@ export const ContextProvider = ({ children }: Provider) => {
     setLoad(true);
     const user: any = localStorage.getItem("userName");
     const datosUser = JSON.parse(user);
+    console.log(datosUser);
     const userPointsData = {
       identification_number: datosUser.id,
       movil: datosUser.phone,
       code_container: `${import.meta.env.VITE_code_container}`,
-      name: datosUser.name,
       documentType: 2,
       generate_points: notPoints,
-      generate_error_puntos_colombia: false,
+      name: datosUser.name,
       products: [
         {
           code: "RP-1",
@@ -148,7 +148,7 @@ export const ContextProvider = ({ children }: Provider) => {
       if (!data.return.active) {
         setNotPoints(false);
       }
-      console.log(data);
+      console.log("-------200--------");
     } catch (error) {
       console.log(error);
       console.log("-------Catch--------");
