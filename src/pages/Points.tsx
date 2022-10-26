@@ -13,12 +13,12 @@ export const Points = () => {
   useEffect(() => {
     /* localStorage.removeItem("token"); */
     localStorage.removeItem("userName");
-    /* setTimeout(() => {
-      navigate("/");
+    setTimeout(() => {
+      navigate("/home");
       setIdUser("");
       setNotPoints(true);
       setLoad(false);
-    }, 15000); */
+    }, 15000);
   }, []);
 
   if (errorBD) {
