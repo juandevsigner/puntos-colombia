@@ -1,12 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { BsPersonCircle } from "react-icons/bs";
 import { useStateContext } from "../context/ContextProvider";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { CardPoints } from "../components";
 import { Spinner, Error } from "../ui";
 
 export const Register = () => {
+  const [call, setCall] = useState<boolean>(true);
   const navigate = useNavigate();
+  setTimeout(() => {
+    setCall(!call);
+  }, 2000);
   const {
     customer,
     setCustomer,
@@ -30,7 +34,7 @@ export const Register = () => {
 
   useEffect(() => {
     getPoints();
-  }, []);
+  }, [call]);
   const userName: any = customer?.split("_");
 
   const handleClick = async () => {
