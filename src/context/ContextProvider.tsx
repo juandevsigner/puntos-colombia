@@ -66,22 +66,27 @@ export const ContextProvider = ({ children }: Provider) => {
 
     try {
       const { data } = await axiosClient.post(
-        "/customer/get_customer",
+        "/puntos-colombia/short_balance",
         userUid,
         configToken
       );
-      console.log(data);
-      const userInfo = {
-        name: data.name,
-        id: data.identification_number,
-        phone: data.movil,
-      };
-      localStorage.setItem("userName", JSON.stringify(userInfo));
-      navigate("/user/register");
+
+      setNotPoints(data.active);
+      if (data.objCustomer === null) {
+        setLoad(false);
+        setModal(true);
+        return;
+      } else {
+        const userInfo = {
+          name: data.name,
+          id: data.identification_number,
+          phone: data.movil,
+        };
+        localStorage.setItem("userName", JSON.stringify(userInfo));
+        navigate("/user/register");
+      }
     } catch (error) {
       console.log(error);
-      setModal(true);
-      setNotPoints(false);
     }
     setLoad(false);
   };
@@ -111,7 +116,6 @@ export const ContextProvider = ({ children }: Provider) => {
     setLoad(true);
     const user: any = localStorage.getItem("userName");
     const datosUser = JSON.parse(user);
-    console.log(datosUser);
     const userPointsData = {
       identification_number: datosUser.id,
       movil: datosUser.phone,
@@ -144,14 +148,12 @@ export const ContextProvider = ({ children }: Provider) => {
         configToken
       );
       setPointsCol(data.mainPoints);
-
       if (!data.allowAccrual) {
         setNotPoints(false);
       }
-      console.log("-------200--------");
     } catch (error) {
       console.log(error);
-      console.log("-------Catch--------");
+
       setErrorBD(true);
       setTimeout(() => {
         navigate("/home");
