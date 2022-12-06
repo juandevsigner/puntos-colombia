@@ -32,6 +32,7 @@ export const AuthBussines = () => {
       pass: password,
       id_business: `${import.meta.env.VITE_id_business}`,
     };
+    console.log(userData);
     await authBussiness(userData);
     setName("");
     setPassword("");

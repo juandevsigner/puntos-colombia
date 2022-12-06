@@ -1,7 +1,11 @@
 import axios, { AxiosInstance } from "axios";
 
-const axiosClient: AxiosInstance = axios.create({
+export const axiosClient: AxiosInstance = axios.create({
   baseURL: `${import.meta.env.VITE_url_puntos_colombia}`,
 });
 
-export default axiosClient;
+export const axiosData: AxiosInstance = axios.create({
+  baseURL: `${import.meta.env.VITE_url_servicio_contenedor}`,
+});
+
+

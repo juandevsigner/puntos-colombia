@@ -2,12 +2,30 @@ import { TiWarning } from "react-icons/ti";
 import EcoShop from "../assets/ecoshopping.webp";
 import { useStateContext } from "../context/ContextProvider";
 import { Modal, ModalForm, Spinner } from "../ui";
+import { NumericKeyboard } from 'react-numeric-keyboard';
+import BackspaceIcon from '@mui/icons-material/Backspace';
+import { useState } from "react";
+
 
 export const AuthUser = () => {
-  const { setIdUser, idUser, load, setMsg, msg, authUser } = useStateContext();
+  const { setIdUser, idUser, load, setMsg, msg, authUser, Tare } = useStateContext();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onChange = (data:any) => {
+    //console.log(data.value);
+    setIdUser(data.value);
+  };
+
+  const setKeyboard = (state:boolean) =>{
+    setIsOpen(state);
+  }
 
   const handleClick = async (e: any) => {
+
+    setIsOpen(false);
     e.preventDefault();
+
+    await Tare();
     if (idUser === "") {
       setMsg("Por favor ingrese un número de cedula");
       setTimeout(() => {
@@ -40,7 +58,8 @@ export const AuthUser = () => {
           className="my-5  border-b border-green-600 w-full p-2 text-center text-xl"
           placeholder="Ingrese su número de cedula"
           type="number"
-          onChange={e => setIdUser(e.target.value)}
+          onFocus={()=>setKeyboard(true)}
+          //onBlur={closeKeyboard}
           value={idUser}
         />
         <button
@@ -48,10 +67,11 @@ export const AuthUser = () => {
           type="submit"
           onClick={handleClick}
         >
-          {load ? <Spinner /> : <p>Comprobar</p>}
+          {load ? <Spinner /> : <p>Comprobar </p>}
         </button>
       </form>
       <img className="w-72" src={EcoShop} alt="ecoshopping" />
+      <NumericKeyboard isOpen={isOpen} onChange={onChange} mode="spaced" backSpaceIcon={<BackspaceIcon/>} />
       <Modal />
       <ModalForm />
     </div>

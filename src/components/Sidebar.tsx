@@ -1,8 +1,18 @@
 import { Link } from "react-router-dom";
 import { MdArrowForwardIos } from "react-icons/md";
 import { IconTree } from "../ui";
+import { useStateContext } from "../context/ContextProvider";
 
 export const Sidebar = () => {
+
+const { checkPort } = useStateContext();
+
+
+const handleRegistrarbutton = async () =>{
+  await checkPort();
+}
+
+
   return (
     <div className="bg-white relative shadow-lg w-1/4 p-10 flex flex-col justify-center items-center">
       <div className="absolute top-0 left-0"></div>
@@ -21,6 +31,7 @@ export const Sidebar = () => {
           className="btn-primary flex items-center justify-between hover:pr-2"
           type="button"
           to="/user"
+          onClick={handleRegistrarbutton}
         >
           Registrar
           <MdArrowForwardIos className="text-xl" />

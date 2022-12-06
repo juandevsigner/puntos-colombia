@@ -11,7 +11,6 @@ export const Points = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    /* localStorage.removeItem("token"); */
     localStorage.removeItem("userName");
     setTimeout(() => {
       setIdUser("");

@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Provider, ValueProps } from "./Interfaces";
-import axiosClient from "../config/axiosClient";
+import {axiosClient,axiosData} from "../config/axiosClient";
 import { UserDate } from "./Interfaces";
 
 const StateContext: React.Context<ValueProps> = createContext({} as ValueProps);
@@ -20,18 +20,62 @@ export const ContextProvider = ({ children }: Provider) => {
 
   const navigate = useNavigate();
 
-  const token = import.meta.env.VITE_token;
+  //const token = import.meta.env.VITE_token;
+  //console.log(token);
 
   useEffect(() => {
-    localStorage.setItem("token", JSON.stringify(token));
-  });
 
-  const configToken = {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-      "id-business": `${import.meta.env.VITE_id_business}`,
-    },
+    const getToken = async () => {
+
+      try {
+        const res = await axiosData.get("/container/autentication");
+        console.log(res.data);
+        
+        if (res.data === "error") {
+          console.log("error obteniendo token");
+          //navigate("/user/register");
+          return;
+        } else {
+          console.log("seteando token")
+          localStorage.setItem("autentication", JSON.stringify(res.data));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+
+    }
+    getToken();
+    localStorage.setItem("token",getAutenticatioData("token"));
+    //console.log(getAutenticatioData("token"));
+  },[]);
+
+  const getAutenticatioData = (param : string) => {
+
+   let autenticateData : string | null = localStorage.getItem("autentication");
+   if (autenticateData != null){
+
+    let jsondata : any = JSON.parse(autenticateData);
+    console.log(jsondata);
+
+    switch(param){
+
+      case "token":
+        return jsondata.token;
+      break;
+
+      case "code_container":
+        return jsondata.code_container;
+      break;
+
+      case "id_business":
+        return jsondata.id_business;
+      break;
+
+      case "key_container":
+        return jsondata.key_container;
+      break;
+    }
+   }
   };
 
   const authBussiness = async (dataUser: UserDate) => {
@@ -57,18 +101,22 @@ export const ContextProvider = ({ children }: Provider) => {
   };
 
   const authUser = async (userId: string) => {
-    setLoad(true);
+
     const userUid = {
       identification_number: userId,
-      code_container: "ESECO08",
+      code_container: getAutenticatioData("code_container"),
       documentType: 2,
     };
 
     try {
-      const { data } = await axiosClient.post(
-        "/puntos-colombia/short_balance",
+
+      const { data } = await axiosClient.post("/puntos-colombia/short_balance",
         userUid,
-        configToken
+        {headers: {
+          "ContentType": "application/json",
+          "Authorization": `Bearer ${getAutenticatioData("token")}`,
+          "id-business": getAutenticatioData("id_business")
+        }}
       );
 
       setNotPoints(data.active);
@@ -93,17 +141,18 @@ export const ContextProvider = ({ children }: Provider) => {
 
   const getPoints = async () => {
     try {
-      const container = {
-        code_container: `${import.meta.env.VITE_code_container}`,
-      };
-      const { data } = await axiosClient.post(
-        "/container/sensor_simulate",
-        container,
-        configToken
-      );
-      setDataPoints(data);
+      const res:any = await axiosData.get("/container/getdata");
+      if (res.data.res){
+
+        console.log(res.data.res)
+        //llevar a pantalla de mantenimiento
+
+      }else{
+        setDataPoints(res.data);
+        //console.log(dataPoints);
+      }
     } catch (error) {
-      console.log(error);
+      console.log("Error leyendo data: ",error);
       setErrorBD(true);
       setTimeout(() => {
         navigate("/home");
@@ -112,40 +161,82 @@ export const ContextProvider = ({ children }: Provider) => {
     }
   };
 
+  const checkPort = async () => {
+
+    console.log("chequeando puerto com...")
+    try {
+    
+      const res:any = await axiosData.get("/container/checkport");
+      console.log(res.data);
+
+      if (res.data.res === "True"){
+
+        console.log("Puerto conectado!");
+
+      }else{
+        console.log("Checkport:Trama no esperada");
+        //navigate("/home"); pantalla mantenimiento
+      }
+    } catch (error) {
+      console.log("Error chequeando puerto: ",error);
+      //navigate("/home"); //pestaña fuera de servicio.
+    }
+  };
+
+  const Tare = async () => {
+    setLoad(true);
+    try {
+    
+      const res:any = await axiosData.get("/container/tare");
+
+      if (res.data){
+
+        console.log(res.data.res);
+
+      }else{
+
+        console.log("Tareo: Trama no es la esperada");
+
+      }
+    } catch (error) {
+      console.log("Error tareando: ",error);
+    }
+  };
+
   const setPoints = async () => {
     setLoad(true);
     const user: any = localStorage.getItem("userName");
     const datosUser = JSON.parse(user);
+    let products : Array<Object> = [];
+    dataPoints.map((item)=>{
+
+        products.push({
+          code: item.code_product,
+          count : item.count
+        })
+        
+      });
     const userPointsData = {
       identification_number: datosUser.id,
       movil: datosUser.phone,
-      code_container: `${import.meta.env.VITE_code_container}`,
+      code_container: getAutenticatioData("code_container"),
       documentType: 2,
       generate_points: notPoints,
       name: datosUser.name,
-      products: [
-        {
-          code: "RP-1",
-          count: 700,
-        },
-        {
-          code: "MOVIL-1",
-          count: 5,
-        },
-        {
-          code: "PILAS-1",
-          count: 2,
-        },
-      ],
-    };
+      products: products
+    }
 
-    console.log(userPointsData);
+    console.log("userPointsData",userPointsData);
 
     try {
       const { data } = await axiosClient.post(
         "/puntos-colombia/process_sale",
         userPointsData,
-        configToken
+        {headers: {
+          "ContentType": "application/json",
+          "Authorization": `Bearer ${getAutenticatioData("token")}`,
+          "id-business": getAutenticatioData("id_business")
+        }}
       );
       setPointsCol(data.mainPoints);
       if (!data.allowAccrual) {
@@ -210,6 +301,8 @@ export const ContextProvider = ({ children }: Provider) => {
         setNotPoints,
         errorBD,
         setErrorBD,
+        Tare,
+        checkPort
       }}
     >
       {children}

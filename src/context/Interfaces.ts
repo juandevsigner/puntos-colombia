@@ -33,4 +33,6 @@ export interface ValueProps {
   getPoints: () => Promise<void>;
   setPoints: () => Promise<void>;
   authUser: (user: string) => Promise<void>;
+  checkPort: () =>Promise<void>;
+  Tare: ()=>Promise<void>;
 }

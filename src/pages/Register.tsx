@@ -10,7 +10,7 @@ export const Register = () => {
   const navigate = useNavigate();
   setTimeout(() => {
     setCall(!call);
-  }, 2000);
+  }, 5000);
   const {
     customer,
     setCustomer,
@@ -54,7 +54,7 @@ export const Register = () => {
       <div className="flex gap-5">
         {dataPoints?.map((data: any) => (
           <CardPoints
-            count={data.count}
+            count={data.count_view}
             name={data.name}
             img={data.url_icon}
             key={data?.id_product}
