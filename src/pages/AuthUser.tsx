@@ -2,7 +2,7 @@ import { TiWarning } from "react-icons/ti";
 import EcoShop from "../assets/ecoshopping.webp";
 import { useStateContext } from "../context/ContextProvider";
 import { Modal, ModalForm, Spinner } from "../ui";
-import { NumericKeyboard } from 'react-numeric-keyboard';
+
 import BackspaceIcon from '@mui/icons-material/Backspace';
 import { useState } from "react";
 
@@ -71,7 +71,7 @@ export const AuthUser = () => {
         </button>
       </form>
       <img className="w-72" src={EcoShop} alt="ecoshopping" />
-      <NumericKeyboard isOpen={isOpen} onChange={onChange} mode="spaced" backSpaceIcon={<BackspaceIcon/>} />
+
       <Modal />
       <ModalForm />
     </div>
