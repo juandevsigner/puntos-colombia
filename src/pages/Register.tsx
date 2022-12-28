@@ -41,15 +41,16 @@ export const Register = () => {
     await setPoints();
     navigate("/user/points");
   };
+
   if (errorBD) {
     return <Error />;
   }
 
   return (
-    <div className="flex flex-col gap-10 justify-center items-center">
+    <div className="flex flex-col gap-10 justify-center text-center w-4/5  items-center">
       <div className="flex items-center justify-between text-green-500 gap-5">
-        <BsPersonCircle className="text-green-500 text-4xl" />
-        <p className="uppercase text-4xl">{userName[0]}</p>
+        <BsPersonCircle className="text-green-500 text-5xl" />
+        <p className="uppercase text-5xl">{userName[0]}</p>
       </div>
       <div className="flex gap-5">
         {dataPoints?.map((data: any) => (
@@ -62,7 +63,7 @@ export const Register = () => {
         ))}
       </div>
 
-      <p className="text-green-500 text-3xl">Objetos registrados</p>
+      <p className="text-green-500 text-4xl">Objetos registrados</p>
       <button onClick={handleClick} type="button" className="btn-primary">
         {load ? <Spinner /> : <p>Finalizar</p>}
       </button>

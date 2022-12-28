@@ -10,11 +10,11 @@ const LayoutUI = () => {
       navigate("/");
       return;
     }
-    console.log("token",token)
+    console.log("token", token);
   }, []);
 
   return (
-    <div className="h-screen  flex justify-center items-center">
+    <div className="h-screen w-full  flex justify-center items-center p-5">
       <Outlet />
     </div>
   );

@@ -4,39 +4,32 @@ import { IconTree } from "../ui";
 import { useStateContext } from "../context/ContextProvider";
 
 export const Sidebar = () => {
+  const { checkPort } = useStateContext();
 
-const { checkPort } = useStateContext();
-
-
-const handleRegistrarbutton = async () =>{
-  await checkPort();
-}
-
+  const handleRegistrarbutton = async () => {
+    await checkPort();
+  };
 
   return (
-    <div className="bg-white relative shadow-lg w-1/4 p-10 flex flex-col justify-center items-center">
-      <div className="absolute top-0 left-0"></div>
-      <div className="flex flex-col justify-center items-center">
-        <IconTree />
+    <div className="bg-white relative h-2/6  p-10 flex flex-col justify-center items-center">
+      <IconTree />
+      <p className="mb-10  text-4xl">
+        Queremos incentivar tu compromiso con la tierra, por cada residuo
+        reciclable registrado,{" "}
+        <span className="font-bold text-green-600 text-4xl">
+          estaremos obsequiándote puntos Colombia.
+        </span>
+      </p>
 
-        <p className="mb-10  text-2xl">
-          Queremos incentivar tu compromiso con la tierra, por cada residuo
-          reciclable registrado,{" "}
-          <span className="font-bold text-green-600 text-3xl">
-            estaremos obsequiándote puntos Colombia.
-          </span>
-        </p>
-
-        <Link
-          className="btn-primary flex items-center justify-between hover:pr-2"
-          type="button"
-          to="/user"
-          onClick={handleRegistrarbutton}
-        >
-          Registrar
-          <MdArrowForwardIos className="text-xl" />
-        </Link>
-      </div>
+      <Link
+        className="btn-primary flex items-center justify-between "
+        type="button"
+        to="/user"
+        onClick={handleRegistrarbutton}
+      >
+        Registrar
+        <MdArrowForwardIos className="text-3xl" />
+      </Link>
     </div>
   );
 };

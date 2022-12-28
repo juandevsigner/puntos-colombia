@@ -7,7 +7,7 @@ body {
 }
 
 .btn-primary {
-  @apply bg-green-500    text-white w-full rounded-full py-2 px-4 uppercase hover:bg-green-600 transition-all delay-100;
+  @apply text-3xl bg-green-500 h-20 w-3/5 text-white rounded-full  px-4 uppercase hover:bg-green-600 transition-all delay-100;
 }
 
 /*---------------------SPINNER-----------------*/

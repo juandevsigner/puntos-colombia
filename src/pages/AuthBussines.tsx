@@ -39,22 +39,19 @@ export const AuthBussines = () => {
   };
 
   return (
-    <div className="h-screen  flex justify-center items-center">
-      <div className="absolute top-0 left-0">
-        <Nature />
-      </div>
+    <div className="h-screen  flex justify-center items-center text-center">
       <div className="flex flex-col items-center justify-items-center transition-all">
         {msg !== "" && <Alert msg={msg} />}
-        <form>
+        <form className="w-4/5">
           <input
-            className="my-5  border-b border-green-600 w-full p-2 text-center text-xl placeholder:text-gray-300"
+            className="my-5  border-b border-green-600 w-full p-5 text-center text-3xl placeholder:text-gray-300"
             placeholder="Nombre de Usuario"
             type="text"
             onChange={e => setName(e.target.value)}
             value={name}
           />
           <input
-            className="my-5  border-b border-green-600 w-full p-2 text-center text-xl placeholder:text-gray-300"
+            className="my-5  border-b border-green-600 w-full p-5 text-center text-3xl placeholder:text-gray-300"
             placeholder="Contraseña"
             type="password"
             onChange={e => setPassword(e.target.value)}
@@ -69,10 +66,7 @@ export const AuthBussines = () => {
             {load ? <Spinner /> : <p>Comprobar</p>}
           </button>
         </form>
-        <img className="w-72" src={EcoShop} alt="ecoshopping" />
-      </div>
-      <div className="absolute bottom-0 right-0 rotate-180">
-        <Nature />
+        <img className="w-3/5" src={EcoShop} alt="ecoshopping" />
       </div>
     </div>
   );
