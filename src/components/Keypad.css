@@ -1,0 +1,64 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.pad {
+  font-size: 1em;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  width: fit-content;
+  box-shadow: 0em 0em 0.5em 0.1em #00000055;
+  padding: 0.2em;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.key {
+  padding: 1em;
+  background-color: transparent;
+  outline: 0px;
+  border: 0px;
+  border-radius: 10em;
+  width: 5em;
+  height: 5em;
+}
+
+.key:hover {
+  background-color: #00000022;
+}
+
+.key-action {
+  padding: 1em;
+  background-color: transparent;
+  outline: 0px;
+  border: 0px;
+  border-radius: 10em;
+  width: 5em;
+  height: 5em;
+  /* color: red */
+}
+
+.key-action:hover {
+  background-color: #00000022;
+}
+
+.input {
+  padding: 0.5em;
+  border: 0px;
+  text-align: center;
+}
+
+.status {
+  font-size: 0.3em;
+  width: 100%;
+  text-align: center;
+  font-weight: bolder;
+  color: dodgerblue;
+}

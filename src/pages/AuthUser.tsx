@@ -2,23 +2,27 @@ import { TiWarning } from "react-icons/ti";
 import EcoShop from "../assets/ecoshopping.webp";
 import { useStateContext } from "../context/ContextProvider";
 import { Modal, ModalForm, Spinner } from "../ui";
-
-import BackspaceIcon from '@mui/icons-material/Backspace';
 import { useState } from "react";
+import { Keypad } from "../components/Keypad";
 
 
 export const AuthUser = () => {
   const { setIdUser, idUser, load, setMsg, msg, authUser, Tare } = useStateContext();
   const [isOpen, setIsOpen] = useState(false);
 
-  const onChange = (data:any) => {
-    //console.log(data.value);
-    setIdUser(data.value);
+  
+  const handleClear = (e : any) => {
+    //console.log(data.value)
+    e.preventDefault();
+    setIdUser("");
   };
 
-  const setKeyboard = (state:boolean) =>{
-    setIsOpen(state);
-  }
+  const keyPulsed = (e: any) => {
+
+    e.preventDefault();
+    console.log(e.target.value);
+    setIdUser(idUser + e.target.value);
+  };
 
   const handleClick = async (e: any) => {
 
@@ -58,10 +62,13 @@ export const AuthUser = () => {
           className="my-5  border-b border-green-600 w-full p-2 text-center text-xl"
           placeholder="Ingrese su número de cedula"
           type="number"
-          onFocus={()=>setKeyboard(true)}
-          //onBlur={closeKeyboard}
           value={idUser}
+          onFocus={()=>setIsOpen(true)}
         />
+        {isOpen ? <Keypad
+          onChange={(e:any) => keyPulsed(e)}
+          clear = {handleClear}
+        /> : null}
         <button
           className="my-3 btn-primary justify-center items-center cursor-pointer transition-all"
           type="submit"
@@ -71,7 +78,7 @@ export const AuthUser = () => {
         </button>
       </form>
       <img className="w-72" src={EcoShop} alt="ecoshopping" />
-
+      
       <Modal />
       <ModalForm />
     </div>
