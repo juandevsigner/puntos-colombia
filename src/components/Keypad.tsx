@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import "./Keypad.css";
-import Backspace from "@material-ui/icons/Backspace";
+import DelLogo from "../assets/delete.png";
 
 interface Props {
   onChange: any;
@@ -52,7 +52,10 @@ export const Keypad = ({ onChange,clear } : Props) => {
           0
         </button>
         <button className="key-action" onClick={(e) => clear(e)}>
-          <Backspace />
+          <img
+              className="w-auto h-auto"
+              src={DelLogo}
+            />
         </button>
       </div>
     </div>
