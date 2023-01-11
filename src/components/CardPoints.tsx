@@ -9,12 +9,12 @@ export const CardPoints = ({ count, name, img }: Props) => {
     <div className="text-center">
       <div className="bg-green-500 rounded-full p-7  flex flex-col items-center justify-center">
         <img className=" w-14 text-center" src={img} alt="imagen-product" />
-        <p className=" text-5xl text-white font-semibold text-center">
+        <p className=" text-9xl text-white font-semibold text-center">
           {count}
         </p>
       </div>
 
-      <p className="text-lg mt-2">{name}</p>
+      <p className="text-4xl mt-2">{name}</p>
     </div>
   );
 };

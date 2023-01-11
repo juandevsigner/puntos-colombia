@@ -48,24 +48,24 @@ export const ModalForm = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-4/5 text-center  transform overflow-hidden rounded-2xl bg-white p-6  align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-xl font-semibold text-center  text-green-600"
+                    className="text-4xl font-semibold text-center  text-green-600"
                   >
                     Registrarse para donar
                   </Dialog.Title>
                   <div>
                     <form>
                       <input
-                        className="my-5  border-b border-green-600 w-full p-2 text-center text-xl"
+                        className="my-5  border-b border-green-600 w-full p-2 text-center text-3xl"
                         placeholder="Ingrese su nombre"
                         type="name"
                         onChange={e => setName(e.target.value)}
                         value={name}
                       />
                       <input
-                        className="my-5  border-b border-green-600 w-full p-2 text-center text-xl"
+                        className="my-5  border-b border-green-600 w-full p-2 text-center text-3xl"
                         placeholder="Ingrese su número de celular"
                         type="number"
                         onChange={e => setPhone(e.target.value)}

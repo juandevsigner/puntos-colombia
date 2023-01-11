@@ -1,13 +1,14 @@
 import { TiWarning } from "react-icons/ti";
 import EcoShop from "../assets/ecoshopping.webp";
 import { useStateContext } from "../context/ContextProvider";
-import { Modal, ModalForm, Spinner } from "../ui";
+import { Alert, Modal, ModalForm, Spinner } from "../ui";
+import BackspaceIcon from "@mui/icons-material/Backspace";
 import { useState } from "react";
 import { Keypad } from "../components/Keypad";
 
-
 export const AuthUser = () => {
-  const { setIdUser, idUser, load, setMsg, msg, authUser, Tare } = useStateContext();
+  const { setIdUser, idUser, load, setMsg, msg, authUser, Tare } =
+    useStateContext();
   const [isOpen, setIsOpen] = useState(false);
 
   
@@ -25,7 +26,6 @@ export const AuthUser = () => {
   };
 
   const handleClick = async (e: any) => {
-
     setIsOpen(false);
     e.preventDefault();
 
@@ -49,17 +49,11 @@ export const AuthUser = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-items-center transition-all">
-      {msg !== "" && (
-        <div className="bg-red-500 py-2 px-5 mb-3 flex gap-3 items-center">
-          <TiWarning className="text-white text-xl" />
-          <p className="text-white text-sm">{msg}</p>
-          <TiWarning className="text-white text-xl" />
-        </div>
-      )}
-      <form>
+    <div className="flex flex-col text-center items-center justify-items-center transition-all w-full">
+      {msg !== "" && <Alert msg={msg} />}
+      <form className="w-4/5">
         <input
-          className="my-5  border-b border-green-600 w-full p-2 text-center text-xl"
+          className="my-5  border-b border-green-600 w-full p-5 text-center text-3xl"
           placeholder="Ingrese su número de cedula"
           type="number"
           value={idUser}
@@ -70,15 +64,15 @@ export const AuthUser = () => {
           clear = {handleClear}
         /> : null}
         <button
-          className="my-3 btn-primary justify-center items-center cursor-pointer transition-all"
+          className="my-3 btn-primary justify-center text-3xl   items-center cursor-pointer transition-all"
           type="submit"
           onClick={handleClick}
         >
           {load ? <Spinner /> : <p>Comprobar </p>}
         </button>
       </form>
-      <img className="w-72" src={EcoShop} alt="ecoshopping" />
-      
+      <img className="w-3/5" src={EcoShop} alt="ecoshopping" />
+
       <Modal />
       <ModalForm />
     </div>
