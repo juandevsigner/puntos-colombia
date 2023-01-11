@@ -12,6 +12,7 @@
   width: fit-content;
   box-shadow: 0em 0em 0.5em 0.1em #00000055;
   padding: 0.2em;
+  margin: auto;
 }
 
 .row {

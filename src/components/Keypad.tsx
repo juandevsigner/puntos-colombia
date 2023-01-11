@@ -1,7 +1,12 @@
 import React from 'react'
 import "./Keypad.css";
 import Backspace from "@material-ui/icons/Backspace";
-export const Keypad = ({ onChange,clear }) => {
+
+interface Props {
+  onChange: any;
+  clear: any;
+}
+export const Keypad = ({ onChange,clear } : Props) => {
   return (
     <div className="pad">
       <div className="row">
