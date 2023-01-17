@@ -157,7 +157,7 @@ export const ContextProvider = ({ children }: Provider) => {
       setTimeout(() => {
         navigate("/home");
         setErrorBD(false);
-      }, 5000);
+      }, 2500);
     }
   };
 

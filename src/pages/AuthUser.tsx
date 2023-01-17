@@ -9,7 +9,7 @@ import { Keypad } from "../components/Keypad";
 export const AuthUser = () => {
   const { setIdUser, idUser, load, setMsg, msg, authUser, Tare } =
     useStateContext();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   
   const handleClear = (e : any) => {
@@ -26,7 +26,7 @@ export const AuthUser = () => {
   };
 
   const handleClick = async (e: any) => {
-    setIsOpen(false);
+    //setIsOpen(false);
     e.preventDefault();
 
     await Tare();
@@ -52,12 +52,13 @@ export const AuthUser = () => {
     <div className="flex flex-col text-center items-center justify-items-center transition-all w-full">
       {msg !== "" && <Alert msg={msg} />}
       <form className="w-4/5">
+      <h2>Paso 2: Ingresa tu numero de cedula</h2>
         <input
           className="my-5  border-b border-green-600 w-full p-5 text-center text-3xl"
           placeholder="Ingrese su número de cedula"
           type="number"
           value={idUser}
-          onFocus={()=>setIsOpen(true)}
+          //onFocus={()=>setIsOpen(true)}
         />
         {isOpen ? <Keypad
           onChange={(e:any) => keyPulsed(e)}

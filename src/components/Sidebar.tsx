@@ -27,7 +27,7 @@ export const Sidebar = () => {
         to="/user"
         onClick={handleRegistrarbutton}
       >
-        Registrar
+        Iniciar
         <MdArrowForwardIos className="text-3xl" />
       </Link>
     </div>
