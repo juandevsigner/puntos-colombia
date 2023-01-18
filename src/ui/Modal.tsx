@@ -5,9 +5,11 @@ import { useStateContext } from "../context/ContextProvider";
 import QR from "../assets/registro_qr_puntos_colombia.png";
 
 export const Modal = () => {
-  const { modal, setModal, setModalForm } = useStateContext();
+  const navigate = useNavigate();
+  const { modal, setModal, setModalForm, userNotPC } = useStateContext();
   const handleClick = () => {
-    setModalForm(true);
+    userNotPC("generico", "222222222 " , "1111111");
+    navigate("/user/register");
   };
   return (
     <>
@@ -49,8 +51,7 @@ export const Modal = () => {
                   </Dialog.Title>
                   <div className="my-5 flex flex-col justify-center items-center">
                     <p className="text-center text-3xl">
-                      Puedes registrarte en Puntos Colombia escaneando el
-                      siguiente QR.
+                      Regístrate en Puntos Colombia escaneando el Qr"
                     </p>
                     <hr className="w-full my-2" />
                     <img className="w-3/5" src={QR} alt="QR-PC" />

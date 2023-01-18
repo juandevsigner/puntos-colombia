@@ -29,8 +29,8 @@ export const Points = () => {
       <div className="bg-green-500 p-5 rounded-3xl">
         <p className="text-4xl uppercase text-white ">
           {!notPoints
-            ? " Gracias por tu donación"
-            : "¡ Felicidades Haz Ganado !"}
+            ? "¡ Gracias por cuidar el planeta !"
+            : "¡ Gracias por cuidar el planeta !"}
         </p>
       </div>
       {!notPoints ? null : (

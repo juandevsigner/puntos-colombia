@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Keypad } from "../components/Keypad";
 
 export const AuthUser = () => {
-  const { setIdUser, idUser, load, setMsg, msg, authUser, Tare } =
+  const { setIdUser, idUser, load, setMsg, msg, authUser, Tare, setLoad } =
     useStateContext();
   const [isOpen, setIsOpen] = useState(true);
 
@@ -34,28 +34,28 @@ export const AuthUser = () => {
       setMsg("Por favor ingrese un número de cedula");
       setTimeout(() => {
         setMsg("");
-      }, 3000);
+      }, 2000);
       return;
-    }
-    if (idUser.length < 5) {
+    }else if (idUser.length < 5){
       setMsg("Ingresa un número valido");
       setTimeout(() => {
         setMsg("");
-      }, 3000);
+        setLoad(false);
+      }, 2000);
       return;
+    }else{
+      await authUser(idUser);
     }
 
-    await authUser(idUser);
   };
 
   return (
     <div className="flex flex-col text-center items-center justify-items-center transition-all w-full">
       {msg !== "" && <Alert msg={msg} />}
       <form className="w-4/5">
-      <h2>Paso 2: Ingresa tu numero de cedula</h2>
         <input
           className="my-5  border-b border-green-600 w-full p-5 text-center text-3xl"
-          placeholder="Ingrese su número de cedula"
+          placeholder="Paso 2: Ingresa Tu número de cedula"
           type="number"
           value={idUser}
           //onFocus={()=>setIsOpen(true)}

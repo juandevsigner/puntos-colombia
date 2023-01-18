@@ -11,10 +11,10 @@ export const ModalForm = () => {
   const [phone, setPhone] = useState<string>("");
 
   const handleClick = async () => {
-    await userNotPC(name, phone);
-    navigate("/user/register");
-    setName("");
-    setPhone("");
+    //await userNotPC(name, phone);
+    //navigate("/user/register");
+    //setName("");
+    //setPhone("");
   };
 
   return (

@@ -65,7 +65,7 @@ export const Register = () => {
 
       <p className="text-green-500 text-4xl">Objetos registrados</p>
       <button onClick={handleClick} type="button" className="btn-primary">
-        {load ? <Spinner /> : <p>Finalizar</p>}
+        {load ? <Spinner /> : <p>Obtener Puntos</p>}
       </button>
     </div>
   );

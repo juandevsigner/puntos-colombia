@@ -254,23 +254,21 @@ export const ContextProvider = ({ children }: Provider) => {
     setLoad(false);
   };
 
-  const userNotPC = async (name: string, phone: string) => {
-    setLoad(true);
+  const userNotPC = (name: string, id:string, phone: string) => {
     try {
       const userInfo = {
         name,
         phone,
-        id: idUser,
+        id: id,
       };
       localStorage.setItem("userName", JSON.stringify(userInfo));
-      navigate("/user/register");
-      setModalForm(false);
+      //navigate("/user/register");
+      //setModalForm(false);
       setModal(false);
-      setIdUser("");
+      //setIdUser("");
     } catch (error) {
       console.log(error);
     }
-    setLoad(false);
   };
 
   return (
