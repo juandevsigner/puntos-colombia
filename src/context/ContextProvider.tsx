@@ -265,7 +265,7 @@ export const ContextProvider = ({ children }: Provider) => {
       //navigate("/user/register");
       //setModalForm(false);
       setModal(false);
-      //setIdUser("");
+      setIdUser(id);
     } catch (error) {
       console.log(error);
     }

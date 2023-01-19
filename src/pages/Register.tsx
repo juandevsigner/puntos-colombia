@@ -4,6 +4,7 @@ import { useStateContext } from "../context/ContextProvider";
 import { useEffect, useState } from "react";
 import { CardPoints } from "../components";
 import { Spinner, Error } from "../ui";
+import { Loading } from "../components/Loading";
 
 export const Register = () => {
   const [call, setCall] = useState<boolean>(true);
@@ -19,7 +20,10 @@ export const Register = () => {
     setPoints,
     load,
     errorBD,
+    idUser
   } = useStateContext();
+
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const userStorage = localStorage.getItem("userName");
@@ -29,8 +33,8 @@ export const Register = () => {
     }
     const data = JSON.parse(userStorage);
     setCustomer(data.name);
-  }),
-    [];
+  },[]);
+
 
   useEffect(() => {
     getPoints();
@@ -48,6 +52,10 @@ export const Register = () => {
 
   return (
     <div className="flex flex-col gap-10 justify-center text-center w-4/5  items-center">
+      <p className="text-green-500 text-5xl">Paso 3: Ingresa tus Productos</p>
+      <br/>
+        <Loading/>
+      <br/>
       <div className="flex items-center justify-between text-green-500 gap-5">
         <BsPersonCircle className="text-green-500 text-5xl" />
         <p className="uppercase text-5xl">{userName[0]}</p>
@@ -65,7 +73,7 @@ export const Register = () => {
 
       <p className="text-green-500 text-4xl">Objetos registrados</p>
       <button onClick={handleClick} type="button" className="btn-primary">
-        {load ? <Spinner /> : <p>Obtener Puntos</p>}
+        {load ? <Spinner /> : <p>{idUser === "222222222" ? "Finalizar" : "Obtener Puntos"}</p>}
       </button>
     </div>
   );

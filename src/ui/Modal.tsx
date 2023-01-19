@@ -1,16 +1,24 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStateContext } from "../context/ContextProvider";
 import QR from "../assets/registro_qr_puntos_colombia.png";
+import { handelRightClick } from '../components/AppUtility';
+
 
 export const Modal = () => {
+  document.removeEventListener('contextmenu', handelRightClick);
   const navigate = useNavigate();
   const { modal, setModal, setModalForm, userNotPC } = useStateContext();
   const handleClick = () => {
-    userNotPC("generico", "222222222 " , "1111111");
+    userNotPC("generico", "222222222" , "1111111");
     navigate("/user/register");
   };
+  useEffect(() => {
+    return () => {
+      document.addEventListener('contextmenu', handelRightClick);      
+    };
+  },[]);
   return (
     <>
       <Transition appear show={modal} as={Fragment}>

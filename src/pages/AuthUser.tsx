@@ -3,13 +3,19 @@ import EcoShop from "../assets/ecoshopping.webp";
 import { useStateContext } from "../context/ContextProvider";
 import { Alert, Modal, ModalForm, Spinner } from "../ui";
 import BackspaceIcon from "@mui/icons-material/Backspace";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Keypad } from "../components/Keypad";
+import { useNavigate } from "react-router-dom";
+import { handelRightClick } from '../components/AppUtility';
+
 
 export const AuthUser = () => {
-  const { setIdUser, idUser, load, setMsg, msg, authUser, Tare, setLoad } =
+  document.removeEventListener('contextmenu', handelRightClick);
+  const { setIdUser, idUser, load, setMsg, msg, authUser, Tare, setLoad, setModal } =
     useStateContext();
   const [isOpen, setIsOpen] = useState(true);
+  const navigate = useNavigate();
+
 
   
   const handleClear = (e : any) => {
@@ -21,7 +27,7 @@ export const AuthUser = () => {
   const keyPulsed = (e: any) => {
 
     e.preventDefault();
-    console.log(e.target.value);
+    //console.log(e.target.value);
     setIdUser(idUser + e.target.value);
   };
 
@@ -44,11 +50,27 @@ export const AuthUser = () => {
       }, 2000);
       return;
     }else{
+      setMsg("");
       await authUser(idUser);
     }
 
   };
 
+  useEffect(() => {
+    return () => {
+      document.addEventListener('contextmenu', handelRightClick);      
+    };
+  },[]);
+
+ /* useEffect(() => {
+    setTimeout(() => {
+      setMsg("");
+      setLoad(false);
+      setModal(false);
+      navigate("/home");
+    }, 1000*60*5);
+  }, [])*/
+  
   return (
     <div className="flex flex-col text-center items-center justify-items-center transition-all w-full">
       {msg !== "" && <Alert msg={msg} />}
@@ -60,10 +82,13 @@ export const AuthUser = () => {
           value={idUser}
           //onFocus={()=>setIsOpen(true)}
         />
-        {isOpen ? <Keypad
-          onChange={(e:any) => keyPulsed(e)}
-          clear = {handleClear}
-        /> : null}
+        {isOpen ?
+                <>       
+                <br/>
+                <Keypad
+                  onChange={(e:any) => keyPulsed(e)}
+                  clear = {handleClear}
+                /><br/></> : null}
         <button
           className="my-3 btn-primary justify-center text-3xl   items-center cursor-pointer transition-all"
           type="submit"

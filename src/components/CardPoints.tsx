@@ -12,6 +12,7 @@ export const CardPoints = ({ count, name, img }: Props) => {
         <p className=" text-9xl text-white font-semibold text-center">
           {count}
         </p>
+        <p className=" text-4xl text-white font-semibold text-center">{name === "ROPA" ? "kg" : ""}</p>
       </div>
 
       <p className="text-4xl mt-2">{name}</p>

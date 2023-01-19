@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./Keypad.css";
 import DelLogo from "../assets/delete.png";
+import { handelRightClick } from '../components/AppUtility';
 
 interface Props {
   onChange: any;
   clear: any;
 }
 export const Keypad = ({ onChange,clear } : Props) => {
+  document.removeEventListener('contextmenu', handelRightClick);
+  useEffect(() => {
+    return () => {
+      document.addEventListener('contextmenu', handelRightClick);      
+    };
+  },[]);
   return (
     <div className="pad">
       <div className="row">
