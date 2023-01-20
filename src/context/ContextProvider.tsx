@@ -270,7 +270,7 @@ export const ContextProvider = ({ children }: Provider) => {
       console.log(error);
     }
   };
-
+  
   return (
     <StateContext.Provider
       value={{

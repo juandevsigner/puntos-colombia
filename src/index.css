@@ -61,3 +61,7 @@ body {
     transform: scale(1);
   }
 }
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
