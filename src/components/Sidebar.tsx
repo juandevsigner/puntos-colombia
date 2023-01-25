@@ -4,9 +4,10 @@ import { IconTree } from "../ui";
 import { useStateContext } from "../context/ContextProvider";
 
 export const Sidebar = () => {
-  const { checkPort } = useStateContext();
+  const { checkPort, settimeExpiry } = useStateContext();
 
   const handleRegistrarbutton = async () => {
+    settimeExpiry();
     await checkPort();
   };
 

@@ -78,6 +78,25 @@ export const ContextProvider = ({ children }: Provider) => {
    }
   };
 
+  const checktimerexpirity = () =>{
+
+    console.log('checking timmer');
+    const item  = JSON.parse(localStorage.getItem("expirytime")!);
+	  const now = new Date()
+	  if (now.getTime() > item.expiry) {
+      localStorage.removeItem("expirytime")
+      navigate("/home");
+	  }
+  }
+
+  const settimeExpiry = () => {
+    const now = new Date()
+    const item = {
+      expiry: now.getTime() + (2*60*1000),
+    }
+    localStorage.setItem("expirytime", JSON.stringify(item))
+  }
+
   const authBussiness = async (dataUser: UserDate) => {
     setLoad(true);
     try {
@@ -254,7 +273,7 @@ export const ContextProvider = ({ children }: Provider) => {
     setLoad(false);
   };
 
-  const userNotPC = (name: string, id:string, phone: string) => {
+  const userNotPC = async (name: string, id:string, phone: string) => {
     try {
       const userInfo = {
         name,
@@ -270,7 +289,7 @@ export const ContextProvider = ({ children }: Provider) => {
       console.log(error);
     }
   };
-  
+
   return (
     <StateContext.Provider
       value={{
@@ -300,7 +319,9 @@ export const ContextProvider = ({ children }: Provider) => {
         errorBD,
         setErrorBD,
         Tare,
-        checkPort
+        checkPort,
+        checktimerexpirity,
+        settimeExpiry
       }}
     >
       {children}

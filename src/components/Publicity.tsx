@@ -3,7 +3,7 @@ import Player from "./Player";
 
 export const Publicity = () => {
   return (
-    <div className="bg-green-500 flex-1 overflow-hidden">
+    <div className="bg-gray-50 flex-1 overflow-hidden">
       <Player/>
     </div>
   );

@@ -29,10 +29,12 @@ export interface ValueProps {
   notPoints: boolean;
   setNotPoints: React.Dispatch<React.SetStateAction<boolean>>;
   authBussiness: (dataUser: UserDate) => Promise<void>;
-  userNotPC: (name: string, phone: string) => Promise<void>;
+  userNotPC: (name: string, id:string, phone: string) => Promise<void>;
   getPoints: () => Promise<void>;
   setPoints: () => Promise<void>;
   authUser: (user: string) => Promise<void>;
   checkPort: () =>Promise<void>;
   Tare: ()=>Promise<void>;
+  checktimerexpirity():void;
+  settimeExpiry():void;
 }
