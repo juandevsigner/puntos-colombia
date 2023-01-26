@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 const Player = () => {
   const [currentVideo, setCurrentVideo] = useState(1);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+
 
   const videos = [
     { src: 'https://j4pro.com/upload/eco/video1.mp4', id: 1 },
@@ -11,7 +14,9 @@ const Player = () => {
 
   const handleEnded = () => {
     if (currentVideo === videos.length) {
-      setCurrentVideo(1);
+      //setCurrentVideo(1);
+      window.location.reload();
+      //videoRef.current && videoRef.current.play();
     } else {
       setCurrentVideo(currentVideo + 1);
     }
@@ -21,6 +26,7 @@ const Player = () => {
     <div>
       {videos.map((video) => (
         <video
+          ref={videoRef}
           key={video.id}
           src={video.src}
           onEnded={handleEnded}

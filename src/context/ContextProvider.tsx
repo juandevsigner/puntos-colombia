@@ -92,7 +92,7 @@ export const ContextProvider = ({ children }: Provider) => {
   const settimeExpiry = () => {
     const now = new Date()
     const item = {
-      expiry: now.getTime() + (2*60*1000),
+      expiry: now.getTime() + (5*60*1000), //5 minutos inactivadad vuelve al home
     }
     localStorage.setItem("expirytime", JSON.stringify(item))
   }
