@@ -91,6 +91,7 @@ export const AuthUser = () => {
 
   useEffect(() => {
       document.addEventListener('contextmenu', handelRightClick);  
+      setIdUser("");
   },[]);
 
   return (

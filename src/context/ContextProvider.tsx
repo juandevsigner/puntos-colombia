@@ -227,14 +227,37 @@ export const ContextProvider = ({ children }: Provider) => {
     const user: any = localStorage.getItem("userName");
     const datosUser = JSON.parse(user);
     let products : Array<Object> = [];
-    dataPoints.map((item)=>{
 
+    for(let i=0;i<dataPoints.length;i++){
+
+      if (i === 2 ){
+
+        if(!(parseInt(dataPoints[i].count) < 100)){
+
+          products.push({
+            code: dataPoints[i].code_product,
+            count : dataPoints[i].count
+          })
+
+        }
+      }else{
+        products.push({
+          code: dataPoints[i].code_product,
+          count : dataPoints[i].count
+        })
+      }
+    }
+    /*dataPoints.map((item)=>{
+
+      if(item.code_producto === "RP-1" && (parseInt(item.count) < 100)){
+        
+      }else{
         products.push({
           code: item.code_product,
           count : item.count
         })
-        
-      });
+      }
+      });*/
     const userPointsData = {
       identification_number: datosUser.id,
       movil: datosUser.phone,
