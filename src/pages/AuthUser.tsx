@@ -54,6 +54,7 @@ export const AuthUser = () => {
       setMsg("Por favor ingrese un número de cedula");
       setTimeout(() => {
         setMsg("");
+        setLoad(false);
       }, 2000);
       return;
     }else if (idUser.length < 5){
