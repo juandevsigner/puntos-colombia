@@ -17,11 +17,10 @@ export const ContextProvider = ({ children }: Provider) => {
   const [modalForm, setModalForm] = useState<boolean>(false);
   const [notPoints, setNotPoints] = useState<boolean>(true);
   const [errorBD, setErrorBD] = useState<boolean>(false);
+  const [videosurls, setVideourls] = useState<Array<any>>([]);
+
 
   const navigate = useNavigate();
-
-  //const token = import.meta.env.VITE_token;
-  //console.log(token);
 
   useEffect(() => {
 
@@ -46,8 +45,32 @@ export const ContextProvider = ({ children }: Provider) => {
     }
     getToken();
     localStorage.setItem("token",getAutenticatioData("token"));
+    getVideosURLS();
     //console.log(getAutenticatioData("token"));
   },[]);
+
+
+  const getVideosURLS = async () =>{
+
+    const datareq = {
+      code: getAutenticatioData("code_container"),
+    }
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${getAutenticatioData("token")}`,
+          "id-business": getAutenticatioData("id_business")  
+       }
+      }
+      const res : any = await axiosClient.post("/container/get_video_container", datareq, config);
+      console.log("videos:",res.data);
+      setVideourls(res.data);
+    } catch (error: any) {
+      console.log(error.response.data.msg);
+    }
+
+  }
 
   const getAutenticatioData = (param : string) => {
 
@@ -247,17 +270,6 @@ export const ContextProvider = ({ children }: Provider) => {
         })
       }
     }
-    /*dataPoints.map((item)=>{
-
-      if(item.code_producto === "RP-1" && (parseInt(item.count) < 100)){
-        
-      }else{
-        products.push({
-          code: item.code_product,
-          count : item.count
-        })
-      }
-      });*/
     const userPointsData = {
       identification_number: datosUser.id,
       movil: datosUser.phone,
@@ -344,7 +356,9 @@ export const ContextProvider = ({ children }: Provider) => {
         Tare,
         checkPort,
         checktimerexpirity,
-        settimeExpiry
+        settimeExpiry,
+        videosurls,
+        getVideosURLS
       }}
     >
       {children}

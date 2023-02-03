@@ -37,4 +37,7 @@ export interface ValueProps {
   Tare: ()=>Promise<void>;
   checktimerexpirity():void;
   settimeExpiry():void;
+  videosurls: any;
+  getVideosURLS: () => Promise<void>;
+
 }

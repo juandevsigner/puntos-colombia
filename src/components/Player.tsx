@@ -1,39 +1,65 @@
-import React, { useRef, useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useRef, useState } from 'react';
+import { useStateContext } from '../context/ContextProvider';
 
 const Player = () => {
-  const [currentVideo, setCurrentVideo] = useState(1);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [videos, setVideos] = useState<string[]>([]);
+  const { videosurls } = useStateContext();
 
+  useEffect(() => {
 
-
-  const videos = [
-    { src: 'https://j4pro.com/upload/eco/video1.mp4', id: 1 },
-    { src: 'https://j4pro.com/upload/eco/video2.mp4', id: 2 },
-    { src: 'https://j4pro.com/upload/eco/video3.mp4', id: 3 },
-  ];
+    async function fetchVideos() {
+      try {
+        const promises = videosurls.map(async (url: { src: string; }) => {
+          const response = await axios.get(url.src, { responseType: 'blob' });
+          const blob = response.data;
+  
+          // Store the video data in the cache
+          caches.open('video-cache').then(cache => cache.put(url.src, new Response(blob)));
+  
+          // Create a URL for the video data
+          const videoBlobUrl = URL.createObjectURL(blob);
+          return videoBlobUrl;
+        });
+  
+        const videos = await Promise.all(promises);
+        setVideos(videos);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  
+    videosurls.forEach((url: { src: string; }) => {
+      // Check if the video data is already in the cache
+      caches.match(url.src).then(response => {
+        if (response) {
+          response.blob().then(blob => {
+            const videoBlobUrl = URL.createObjectURL(blob);
+            setVideos(videos => [...videos, videoBlobUrl]);
+          });
+        } else {
+          fetchVideos();
+        }
+      });
+    });
+  }, [videosurls]);
 
   const handleEnded = () => {
-    if (currentVideo === videos.length) {
-      //setCurrentVideo(1);
-      window.location.reload();
-      //videoRef.current && videoRef.current.play();
-    } else {
-      setCurrentVideo(currentVideo + 1);
-    }
+    setCurrentVideoIndex(currentIndex => {
+      if (currentIndex + 1 < videos.length) {
+        return currentIndex + 1;
+      }
+      return 0;
+    });
   };
 
   return (
     <div>
-      {videos.map((video) => (
-        <video
-          ref={videoRef}
-          key={video.id}
-          src={video.src}
-          onEnded={handleEnded}
-          autoPlay={video.id === currentVideo}
-          style={{ display: video.id === currentVideo ? 'block' : 'none' }}
-        />
-      ))}
+      {videos.length > 0 && (
+        <video src={videos[currentVideoIndex]} autoPlay onEnded={handleEnded} />
+      )}
+      {!videos.length && <p>cargando videos...</p>}
     </div>
   );
 }

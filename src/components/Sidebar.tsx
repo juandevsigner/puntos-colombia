@@ -12,25 +12,16 @@ export const Sidebar = () => {
   };
 
   return (
-    <div className="bg-white relative h-2/6  p-10 flex flex-col justify-center items-center">
-      <IconTree />
-      <p className="mb-10  text-4xl">
-        Queremos incentivar tu compromiso con la tierra, por cada residuo
-        reciclable registrado,{" "}
-        <span className="font-bold text-green-600 text-4xl">
-          estaremos obsequiándote puntos Colombia.
-        </span>
-      </p>
-
-      <Link
-        className="btn-primary flex items-center justify-between "
-        type="button"
-        to="/user"
-        onClick={handleRegistrarbutton}
-      >
-        Iniciar
-        <MdArrowForwardIos className="text-3xl" />
+    <div className="p-10 flex flex-col justify-center items-center">
+      <Link to={"/user"}>
+        <button className="w-72 h-72 rounded-full 
+                       bg-green-500  text-white animate-bounce" onClick={handleRegistrarbutton}>
+            <p className="text-5xl">Click</p>
+            <p className="text-5xl">Aqui</p>
+            <p className="text-5xl">Para</p>
+            <p className="text-5xl">Iniciar</p>     
+        </button>
       </Link>
-    </div>
+</div>
   );
 };
