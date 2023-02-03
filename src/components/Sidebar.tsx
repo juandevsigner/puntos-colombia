@@ -17,7 +17,6 @@ export const Sidebar = () => {
         <button className="w-72 h-72 rounded-full 
                        bg-green-500  text-white animate-bounce" onClick={handleRegistrarbutton}>
             <p className="text-5xl">Click</p>
-            <p className="text-5xl">Aqui</p>
             <p className="text-5xl">Para</p>
             <p className="text-5xl">Iniciar</p>     
         </button>

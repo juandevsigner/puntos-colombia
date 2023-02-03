@@ -14,7 +14,10 @@ export const Home = () => {
 
   return (
     <div className="flex flex-col justify-between h-screen ">
+      <br/>
+      <br/>
       <Sidebar />
+      <br />
       <Publicity />
     </div>
   );
