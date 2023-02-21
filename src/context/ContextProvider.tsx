@@ -168,9 +168,9 @@ export const ContextProvider = ({ children }: Provider) => {
         return;
       } else {
         const userInfo = {
-          name: data.name,
+          name: data.payload.name,
           id: data.identification_number,
-          phone: data.movil,
+          phone: data.payload.movil,
         };
         localStorage.setItem("userName", JSON.stringify(userInfo));
         navigate("/user/register");
