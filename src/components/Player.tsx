@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useStateContext } from '../context/ContextProvider';
+import "./Player.css";
+
 
 const Player = () => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
@@ -57,7 +59,7 @@ const Player = () => {
   return (
     <div>
       {videos.length > 0 && (
-        <video src={videos[currentVideoIndex]} autoPlay onEnded={handleEnded} />
+        <video src={videos[currentVideoIndex]} autoPlay onEnded={handleEnded}/>
       )}
       {!videos.length && <p>cargando videos...</p>}
     </div>

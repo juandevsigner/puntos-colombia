@@ -162,7 +162,7 @@ export const ContextProvider = ({ children }: Provider) => {
       );
 
       setNotPoints(data.active);
-      if (data.objCustomer === null) {
+      if (data.payload.allowAccrual === false) {
         setLoad(false);
         setModal(true);
         return;

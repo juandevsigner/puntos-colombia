@@ -93,6 +93,7 @@ export const AuthUser = () => {
   useEffect(() => {
       document.addEventListener('contextmenu', handelRightClick);  
       setIdUser("");
+      setModal(false);
   },[]);
 
   return (

@@ -88,7 +88,7 @@ export const Modal = () => {
                       className="btn-primary"
                       onClick={handleClick}
                     >
-                      Donar
+                      Contribuir Sin Puntos
                     </button>
                   </div>
                 </Dialog.Panel>
