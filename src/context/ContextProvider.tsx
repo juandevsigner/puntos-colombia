@@ -101,13 +101,14 @@ export const ContextProvider = ({ children }: Provider) => {
    }
   };
 
-  const checktimerexpirity = () =>{
+  const checktimerexpirity = async () =>{
 
     console.log('checking timmer');
     const item  = JSON.parse(localStorage.getItem("expirytime")!);
 	  const now = new Date()
 	  if (now.getTime() > item.expiry) {
-      localStorage.removeItem("expirytime")
+      localStorage.removeItem("expirytime");
+      await Tare();
       navigate("/home");
 	  }
   }
@@ -191,7 +192,7 @@ export const ContextProvider = ({ children }: Provider) => {
 
       }else{
         setDataPoints(res.data);
-        //console.log(dataPoints);
+        //console.log(res.data);
       }
     } catch (error) {
       console.log("Error leyendo data: ",error);

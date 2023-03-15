@@ -8,7 +8,7 @@ import { Loading } from "../components/Loading";
 import { handelRightClick } from '../components/AppUtility';
 
 export const Register = () => {
-  const { checktimerexpirity } = useStateContext();
+  const { checktimerexpirity,Tare } = useStateContext();
   const [call, setCall] = useState<boolean>(true);
   const [ExpirityTime, setExpirityTime] = useState(0);
   document.removeEventListener('contextmenu', handelRightClick);
@@ -19,7 +19,7 @@ export const Register = () => {
     localStorage.removeItem("expirytime");
     const now = new Date()
     const item = {
-      expiry: now.getTime() + (2*60*1000),
+      expiry: now.getTime() + (7*60*1000),
     }
     localStorage.setItem("expirytime", JSON.stringify(item))
     //alert("click")
@@ -82,6 +82,7 @@ export const Register = () => {
 
   const handleClick = async () => {
     await setPoints();
+    await Tare();
     navigate("/user/points");
   };
 

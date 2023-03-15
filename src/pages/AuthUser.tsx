@@ -10,7 +10,7 @@ import { handelRightClick } from '../components/AppUtility';
 
 
 export const AuthUser = () => {
-  const { setIdUser, idUser, load, setMsg, msg, authUser, Tare, setLoad, setModal , checktimerexpirity } =
+  const { setIdUser, idUser, load, setMsg, msg, authUser, setLoad, setModal , checktimerexpirity } =
     useStateContext();
   const [isOpen, setIsOpen] = useState(true);
   const [ExpirityTime, setExpirityTime] = useState(0);
@@ -25,7 +25,7 @@ export const AuthUser = () => {
     localStorage.removeItem("expirytime");
     const now = new Date()
     const item = {
-      expiry: now.getTime() + (2*60*1000),
+      expiry: now.getTime() + (3*60*1000),
     }
     localStorage.setItem("expirytime", JSON.stringify(item))
     //alert("click")
@@ -49,7 +49,6 @@ export const AuthUser = () => {
     //setIsOpen(false);
     e.preventDefault();
 
-    await Tare();
     if (idUser === "") {
       setMsg("Por favor ingrese un número de cedula");
       setTimeout(() => {
