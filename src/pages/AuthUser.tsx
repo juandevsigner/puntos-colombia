@@ -10,7 +10,7 @@ import { handelRightClick } from '../components/AppUtility';
 
 
 export const AuthUser = () => {
-  const { setIdUser, idUser, load, setMsg, msg, authUser, setLoad, setModal , checktimerexpirity } =
+  const { setIdUser, idUser, load, setMsg, msg, authUser, setLoad, setModal , checktimerexpirity, Tare } =
     useStateContext();
   const [isOpen, setIsOpen] = useState(true);
   const [ExpirityTime, setExpirityTime] = useState(0);
@@ -65,6 +65,7 @@ export const AuthUser = () => {
       return;
     }else{
       setMsg("");
+      await Tare();
       await authUser(idUser);
     }
 

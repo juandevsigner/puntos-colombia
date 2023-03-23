@@ -19,6 +19,7 @@ export const Home = () => {
       <Sidebar />
       <br />
       <Publicity />
+      <b>Version: 1.0.0</b>
     </div>
   );
 };

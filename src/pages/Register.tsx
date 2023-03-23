@@ -19,13 +19,17 @@ export const Register = () => {
     localStorage.removeItem("expirytime");
     const now = new Date()
     const item = {
-      expiry: now.getTime() + (7*60*1000),
+      expiry: now.getTime() + (5*60*1000),
     }
     localStorage.setItem("expirytime", JSON.stringify(item))
     //alert("click")
     }
     
   };
+
+  const getPuntos = async () =>{
+    await getPoints();
+  }
 
   const navigate = useNavigate();
   setTimeout(() => {
@@ -76,13 +80,12 @@ export const Register = () => {
 
 
   useEffect(() => {
-    getPoints();
+    getPuntos();
   }, [call]);
   const userName: any = customer?.split("_");
 
   const handleClick = async () => {
     await setPoints();
-    await Tare();
     navigate("/user/points");
   };
 

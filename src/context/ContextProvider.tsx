@@ -196,11 +196,11 @@ export const ContextProvider = ({ children }: Provider) => {
       }
     } catch (error) {
       console.log("Error leyendo data: ",error);
-      setErrorBD(true);
+      /*setErrorBD(true);
       setTimeout(() => {
         navigate("/home");
         setErrorBD(false);
-      }, 2500);
+      }, 2500);*/
     }
   };
 
