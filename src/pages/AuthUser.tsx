@@ -45,6 +45,10 @@ export const AuthUser = () => {
     setIdUser(idUser + e.target.value);
   };
 
+  const handleReturnHome = () => {
+    navigate("/home");
+  }
+
   const handleClick = async (e: any) => {
     //setIsOpen(false);
     e.preventDefault();
@@ -120,6 +124,12 @@ export const AuthUser = () => {
           onClick={handleClick}
         >
           {load ? <Spinner /> : <p>Continuar </p>}
+        </button>
+        <button
+          className="my-3 btn-secondary justify-center text-3xl   items-center cursor-pointer transition-all"
+          onClick={handleReturnHome}
+        >
+          <p>Volver al inicio</p>
         </button>
       </form>
       <img className="w-3/5" src={EcoShop} alt="ecoshopping" />

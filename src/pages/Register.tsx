@@ -27,6 +27,10 @@ export const Register = () => {
     
   };
 
+  const handleReturnHome = () => {
+    navigate("/home");
+  }
+
   const getPuntos = async () =>{
     await getPoints();
   }
@@ -115,6 +119,12 @@ export const Register = () => {
       <button onClick={handleClick} type="button" className="btn-primary">
         {load ? <Spinner /> : <p>{idUser === "222222222" ? "Continuar" : "Continuar"}</p>}
       </button>
+      <button
+          className="my-3 btn-secondary justify-center text-3xl   items-center cursor-pointer transition-all"
+          onClick={handleReturnHome}
+        >
+          <p>Volver al inicio</p>
+        </button>
     </div>
   );
 };
