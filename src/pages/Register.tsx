@@ -7,6 +7,8 @@ import { Spinner, Error } from "../ui";
 import { Loading } from "../components/Loading";
 import { handelRightClick } from '../components/AppUtility';
 
+import logo from '../assets/clothes-hanger.png'
+
 export const Register = () => {
   const { checktimerexpirity,Tare } = useStateContext();
   const [call, setCall] = useState<boolean>(true);
@@ -105,14 +107,14 @@ export const Register = () => {
         <p className="uppercase text-4xl">{userName[0]}</p>
       </div>
       <div className="flex gap-5">
-        {dataPoints?.map((data: any) => (
+        {dataPoints.length > 0 ? 
           <CardPoints
-            count={data.count_view}
-            name={data.name}
-            img={data.url_icon}
-            key={data?.id_product}
-          />
-        ))}
+            count={dataPoints[2]?.count_view}
+            name={dataPoints[2]?.name}
+            img={logo}
+            key={dataPoints[2]?.id_product}
+          /> : null  
+        }
       </div>
 
       <p className="text-green-500 text-4xl">Objetos registrados</p>

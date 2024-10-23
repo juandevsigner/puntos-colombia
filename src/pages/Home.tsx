@@ -23,7 +23,7 @@ export const Home = () => {
       <Sidebar />
       <br />
       <Publicity />
-      <b>Version: 1.0.1</b>
+      <b>Version: 1.0.2</b>
     </div>
   );
 };

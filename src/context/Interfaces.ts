@@ -39,5 +39,6 @@ export interface ValueProps {
   settimeExpiry():void;
   videosurls: any;
   getVideosURLS: () => Promise<void>;
+  getSensorLevel: () => Promise<void>;
 
 }

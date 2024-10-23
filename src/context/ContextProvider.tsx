@@ -18,6 +18,12 @@ export const ContextProvider = ({ children }: Provider) => {
   const [notPoints, setNotPoints] = useState<boolean>(true);
   const [errorBD, setErrorBD] = useState<boolean>(false);
   const [videosurls, setVideourls] = useState<Array<any>>([]);
+  const [pilas,setPilas] = useState<number>(0);
+  const [baterias,setBaterias] = useState<number>(0);
+  const [ropa,setRopa] = useState<number>(0.0);
+  const [sensorlevel, setSensorLevel] = useState<number>(0);
+
+
 
 
   const navigate = useNavigate();
@@ -109,7 +115,7 @@ export const ContextProvider = ({ children }: Provider) => {
 	  if (now.getTime() > item.expiry) {
       localStorage.removeItem("expirytime");
       await Tare();
-      navigate("/home");
+      navigate("/home"); 
 	  }
   }
 
@@ -192,15 +198,58 @@ export const ContextProvider = ({ children }: Provider) => {
 
       }else{
         setDataPoints(res.data);
+        res.data?.map((item:any) =>{
+
+          if(item.code_product === 'MOVIL-1'){
+            let bateriasNumeric:number = parseInt(item.count_view);
+            if(baterias !== bateriasNumeric){
+              console.log("insertaron baterias,Actualizando tiempo");
+              settimeExpiry();
+            }
+            setBaterias(bateriasNumeric);
+          }else if (item.code_product === 'PILAS-1'){
+            let pilasNumeric:number = parseInt(item.count_view);
+            if(pilas !== pilasNumeric){
+              console.log("insertaron pilas,Actualizando tiempo");
+              settimeExpiry();
+
+            }
+            setPilas(pilasNumeric);
+
+          }else if(item.code_product === 'RP-1'){
+            let ropaNumeric:number = parseFloat(item.count_view);
+            if((ropaNumeric - ropa) >= 0.5){
+              console.log("insertaron ropa,Actualizando tiempo");
+              settimeExpiry();
+
+            }
+            setRopa(ropaNumeric);
+          }  
+        });
         //console.log(res.data);
       }
     } catch (error) {
       console.log("Error leyendo data: ",error);
-      /*setErrorBD(true);
-      setTimeout(() => {
-        navigate("/home");
-        setErrorBD(false);
-      }, 2500);*/
+      
+    }
+  };
+
+  const getSensorLevel = async () => {
+    try {
+      const res:any = await axiosData.get("/container/getlevelsensor");
+      if (res.data.res){
+
+        console.log(res.data.res)
+        //llevar a pantalla de mantenimiento
+
+      }else{
+        let datasensor:number = parseInt(res.data);
+        console.log("datasensor:",datasensor);
+        setSensorLevel(datasensor);
+        
+      }
+    } catch (error) {
+      console.log("Error leyendo data: ",error);
     }
   };
 
@@ -281,7 +330,7 @@ export const ContextProvider = ({ children }: Provider) => {
       products: products
     }
 
-    console.log("userPointsData",userPointsData);
+    //console.log("userPointsData",userPointsData);
 
     try {
       const { data } = await axiosClient.post(
@@ -359,7 +408,8 @@ export const ContextProvider = ({ children }: Provider) => {
         checktimerexpirity,
         settimeExpiry,
         videosurls,
-        getVideosURLS
+        getVideosURLS,
+        getSensorLevel
       }}
     >
       {children}
