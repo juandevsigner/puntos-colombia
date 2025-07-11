@@ -10,7 +10,7 @@ import { handelRightClick } from '../components/AppUtility';
 import logo from '../assets/clothes-hanger.png'
 
 export const Register = () => {
-  const { checktimerexpirity,Tare } = useStateContext();
+  const { checktimerexpirity } = useStateContext();
   const [call, setCall] = useState<boolean>(true);
   const [ExpirityTime, setExpirityTime] = useState(0);
   document.removeEventListener('contextmenu', handelRightClick);
@@ -24,7 +24,6 @@ export const Register = () => {
       expiry: now.getTime() + (5*60*1000),
     }
     localStorage.setItem("expirytime", JSON.stringify(item))
-    //alert("click")
     }
     
   };
@@ -41,6 +40,7 @@ export const Register = () => {
   setTimeout(() => {
     setCall(!call);
   }, 2500);
+
   const {
     customer,
     setCustomer,
@@ -48,20 +48,18 @@ export const Register = () => {
     dataPoints,
     setPoints,
     load,
-    errorBD,
     idUser
   } = useStateContext();
 
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const userStorage = localStorage.getItem("userName");
-    if (!userStorage) {
+    //const userStorage = localStorage.getItem("userName");
+    /*if (!userStorage) {
       navigate("/user");
       return;
     }
     const data = JSON.parse(userStorage);
-    setCustomer(data.name);
+    setCustomer(data.name);*/
     document.addEventListener('contextmenu', handelRightClick);  
 
   },[]);
@@ -91,21 +89,13 @@ export const Register = () => {
   const userName: any = customer?.split("_");
 
   const handleClick = async () => {
-    await setPoints();
-    navigate("/user/points");
+    //await setPoints();
+    navigate("/user/giftselect");
   };
-
-  if (errorBD) {
-    return <Error />;
-  }
 
   return (
     <div className="flex flex-col gap-10 justify-center text-center w-4/5  items-center">
       <p className="text-green-500 text-7xl pb-20">Paso 3: Ingresa tus Productos</p>
-      <div className="flex items-center justify-between text-green-500 gap-5">
-        <BsPersonCircle className="text-green-500 text-5xl" />
-        <p className="uppercase text-4xl">{userName[0]}</p>
-      </div>
       <div className="flex gap-5">
         {dataPoints.length > 0 ? 
           <CardPoints

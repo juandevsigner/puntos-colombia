@@ -9,8 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { handelRightClick } from '../components/AppUtility';
 
 
-export const AuthUser = () => {
-  const { setIdUser, idUser, load, setMsg, msg, authUser, setLoad, setModal , checktimerexpirity, Tare } =
+export const PhoneUser = () => {
+  const { setPhoneUser, phoneUser, load, setMsg, msg, setLoad, checktimerexpirity, Tare } =
     useStateContext();
   const [isOpen, setIsOpen] = useState(true);
   const [ExpirityTime, setExpirityTime] = useState(0);
@@ -34,15 +34,13 @@ export const AuthUser = () => {
   };
 
   const handleClear = (e : any) => {
-    //console.log(data.value)
     e.preventDefault();
-    setIdUser("");
+    setPhoneUser("");
   };
 
   const keyPulsed = (e: any) => {
     e.preventDefault();
-    //console.log(e.target.value);
-    setIdUser(idUser + e.target.value);
+    setPhoneUser(phoneUser + e.target.value);
   };
 
   const handleReturnHome = () => {
@@ -53,23 +51,25 @@ export const AuthUser = () => {
     //setIsOpen(false);
     e.preventDefault();
 
-    if (idUser === "") {
-      setMsg("Por favor ingrese un número de cedula");
+    if (phoneUser === "") {
+      setMsg("Por favor ingrese un número de celular");
       setTimeout(() => {
         setMsg("");
         setLoad(false);
       }, 2000);
       return;
-    }else if (idUser.length < 5){
-      setMsg("Ingresa un número valido");
+    }else if (phoneUser.length != 10){
+      setMsg("Ingresa un número celular valido");
       setTimeout(() => {
         setMsg("");
         setLoad(false);
       }, 2000);
       return;
     }else{
-      navigate("/user/phone");
       setMsg("");
+      await Tare();
+      navigate("/user/register");
+
     }
 
   };
@@ -95,19 +95,18 @@ export const AuthUser = () => {
 
   useEffect(() => {
       document.addEventListener('contextmenu', handelRightClick);  
-      setIdUser("");
-      setModal(false);
+      setPhoneUser("");
   },[]);
 
   return (
     <div className="flex flex-col text-center items-center justify-items-center transition-all w-full">
       {msg !== "" && <Alert msg={msg} />}
-      <p className="text-green-500 text-7xl">Paso 1: Ingresa tu cédula</p>
+      <p className="text-green-500 text-7xl">Paso 2: Ingresa tu # celular</p>
       <form className="w-4/5">
         <input
           className="my-5  border-b border-green-600 w-full p-5 text-center text-3xl"
           type="number"
-          value={idUser}
+          value={phoneUser}
           //onFocus={()=>setIsOpen(true)}
         />
         {isOpen ?

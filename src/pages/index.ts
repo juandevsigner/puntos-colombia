@@ -3,3 +3,4 @@ export * from "./AuthUser";
 export * from "./Home";
 export * from "./Points";
 export * from "./Register";
+export * from "./PhoneUser";

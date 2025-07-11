@@ -10,7 +10,6 @@ const LayoutUI = () => {
       navigate("/");
       return;
     }
-    console.log("token", token);
   }, []);
 
   return (

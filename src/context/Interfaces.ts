@@ -26,8 +26,8 @@ export interface ValueProps {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
   errorBD: boolean;
   setErrorBD: React.Dispatch<React.SetStateAction<boolean>>;
-  notPoints: boolean;
-  setNotPoints: React.Dispatch<React.SetStateAction<boolean>>;
+  givePoints: boolean;
+  setGivePoints: React.Dispatch<React.SetStateAction<boolean>>;
   authBussiness: (dataUser: UserDate) => Promise<void>;
   userNotPC: (name: string, id:string, phone: string) => Promise<void>;
   getPoints: () => Promise<void>;
@@ -40,5 +40,14 @@ export interface ValueProps {
   videosurls: any;
   getVideosURLS: () => Promise<void>;
   getSensorLevel: () => Promise<void>;
+  phoneUser: string;
+  setPhoneUser: React.Dispatch<React.SetStateAction<string>>;
+  bonos: Array<any>;
+  bonoselected: string;
+  setBonoSelected: React.Dispatch<React.SetStateAction<string>>;
+  redimirBono: () => Promise<void>;
+  userPC: any;
+  setUserPC: React.Dispatch<React.SetStateAction<any>>;
+
 
 }

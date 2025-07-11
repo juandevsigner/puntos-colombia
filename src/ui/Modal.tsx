@@ -12,7 +12,7 @@ export const Modal = () => {
   const { modal, setModal, setModalForm, userNotPC } = useStateContext();
   const handleClick = () => {
     userNotPC("generico", "222222222" , "1111111");
-    navigate("/user/register");
+    navigate("/user/points");
   };
   useEffect(() => {
     return () => {
